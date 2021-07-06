@@ -1,17 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Data van externe site.
     </ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content class="padleft" [fullscreen]="true">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <button ion-button icon-only (click) = "mapData()">klik hier om data opnieuw te lezen</button>
+  <br><h2 class="padLeft">{{actualZin}}  <ion-button (click)="nextZin()" tooltip="nog invullen">
+    <ion-icon slot="icon-only" name="aperture">shuffle n keer 2 items uit lijst willekeurig</ion-icon>
+  </ion-button></h2>  <h2 class="padLeft">tijd: {{tijdVerstreken}}</h2>
+<!--   <ion-grid>
+    <ion-row color="primary" justify-content-center  *ngFor="let zin of zinnen2; let i = index">
+      <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
+       <h2> {{zin.id}}</h2>
+      </ion-col>
+      <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
+        <h2> {{zin.nivo}}</h2>
+       </ion-col>
+      <ion-col align-self-center size-md="7" size-lg="6" size-xs="6"  >
+        <h2> {{zin.tekst}}</h2>
+       </ion-col>
+    </ion-row>
+  </ion-grid> -->
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-footer>
+    <p><a href="https://www.youtube.com/watch?v=uOfB_Ex9eQM">Page was buid based on THIS video read json</a></p>
+  </ion-footer>
 </ion-content>

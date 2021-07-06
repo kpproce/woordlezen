@@ -1,0 +1,24 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+
+  constructor(private http: HttpClient) { }
+
+  getLocalData() {
+    return this.http.get("/assets/data/songs.json")
+  }
+
+  getRemoteData() {
+    return this.http.get("https://weerlive.nl/api/json-data-10min.php?key=demo&locatie=Amsterdam")
+  }
+
+  getRemoteDataZinnen() {
+    return this.http.get("http://localhost/php_api_test/apiBasic/read_zinnen.php")
+  }
+
+
+}
