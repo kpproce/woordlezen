@@ -17,7 +17,7 @@ export class DataService {
   }
 
   getRemoteDataZinnen() {
-    return this.http.get('http://localhost/php_api_test/apiBasic/read_zinnen.php');
+    return this.http.get('https://silvermusic.nl/test/apiBasic/read_zinnen.php');
   }
 
   insertNewRemoteDataZin(tekst: string) {
