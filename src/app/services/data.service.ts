@@ -9,16 +9,19 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getLocalData() {
-    return this.http.get("/assets/data/songs.json")
+    return this.http.get('/assets/data/songs.json');
   }
 
   getRemoteData() {
-    return this.http.get("https://weerlive.nl/api/json-data-10min.php?key=demo&locatie=Amsterdam")
+    return this.http.get('https://weerlive.nl/api/json-data-10min.php?key=demo&locatie=Amsterdam');
   }
 
   getRemoteDataZinnen() {
-    return this.http.get("http://localhost/php_api_test/apiBasic/read_zinnen.php")
+    return this.http.get('http://localhost/php_api_test/apiBasic/read_zinnen.php');
   }
 
+  insertNewRemoteDataZin(tekst: string) {
+    return this.http.get('https://silvermusic.nl/test/apiBasic/write_zin.php?tekst="'+ tekst + '"');
+  }
 
 }

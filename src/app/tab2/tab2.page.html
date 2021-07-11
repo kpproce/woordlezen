@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Beheer
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,34 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
+      <ion-title size="large">Beheer dataset</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
-</ion-content>
+  <div class="padleft">
+
+  </div>
+    <ion-item>
+      <ion-row>
+        <ion-col align-self-center size-md="3" size-lg="3" size-xs="3"  >
+          nivo (1-5):
+        </ion-col>
+        <ion-col align-self-center size-md="3" size-lg="3" size-xs="3"  >
+          <ion-input  name="nivo" type="text" placeholder="nivo van deze zin" [(ngModel)]='zinNivo'> </ion-input>
+        </ion-col>
+        <ion-col align-self-center size-md="3" size-lg="3" size-xs="3">
+          Tekst:
+        </ion-col>
+        <ion-col align-self-center size-md="9" size-lg="9" size-xs="9">
+          <ion-input  name="nivo" type="text" placeholder="tekst van deze zin" [(ngModel)]='zinTekst'> </ion-input>
+        </ion-col>
+        <ion-button (click)="addNewZinToDatabaseApi()" tooltip="nog invullen">
+          <ion-icon slot="icon-only" name="ion-save"></ion-icon>
+        </ion-button>
+      </ion-row>
+
+    </ion-item>
+
+    {{resultFromDataService.actie}}<br>
+    {{resultFromDataService.tekst}}
+  </ion-content>

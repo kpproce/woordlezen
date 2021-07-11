@@ -1,17 +1,51 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Data van externe site.
+      {{this.aantalZinnen}} zinnen. Lees --> klik op 1e button
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="padleft" [fullscreen]="true">
+<ion-content [fullscreen]="true">
 
-  <button ion-button icon-only (click) = "mapData()">klik hier om data opnieuw te lezen</button>
-  <br><h2 class="padLeft">{{actualZin}}  <ion-button (click)="nextZin()" tooltip="nog invullen">
-    <ion-icon slot="icon-only" name="aperture">shuffle n keer 2 items uit lijst willekeurig</ion-icon>
-  </ion-button></h2>  <h2 class="padLeft">tijd: {{tijdVerstreken}}</h2>
-<!--   <ion-grid>
+  <ion-grid>
+    <ion-row color="primary" justify-content-center>
+      <ion-col align-self-center size-md="8" size-lg="6" size-xs="6"  >
+        <h2>{{actualZin}}</h2>
+      </ion-col>
+
+      <ion-col align-self-center size-md="1" size-lg="2" size-xs="2"  >
+        <ion-button (click)="nextZin()" tooltip="nog invullen">
+          <ion-icon slot="icon-only" name="aperture"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <ion-col align-self-center size-md="1" size-lg="2" size-xs="2"  >
+        <ion-button (click)="resetTijd() " tooltip="nog invullen">
+          <ion-icon slot="icon-only" name="refresh"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col align-self-center size-md="1" size-lg="2" size-xs="2"  >
+        {{verstreken}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+  <ion-grid>
+    <ion-row color="primary" justify-content-center  *ngFor="let geradenItem of geraden; let i = index">
+      <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
+       {{geradenItem.zin}}
+       </ion-col>
+      <ion-col align-self-center size-md="7" size-lg="6" size-xs="6"  >
+         {{geradenItem.tijd}}
+       </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+   <!--   <ion-grid>
     <ion-row color="primary" justify-content-center  *ngFor="let zin of zinnen2; let i = index">
       <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
        <h2> {{zin.id}}</h2>
@@ -25,7 +59,8 @@
     </ion-row>
   </ion-grid> -->
 
-  <ion-footer>
-    <p><a href="https://www.youtube.com/watch?v=uOfB_Ex9eQM">Page was buid based on THIS video read json</a></p>
-  </ion-footer>
+
+  <!-- <ion-footer>
+    <p></p><a href="https://www.youtube.com/watch?v=uOfB_Ex9eQM">Page was buid based on THIS video read json</a></p>
+  </ion-footer> -->
 </ion-content>
