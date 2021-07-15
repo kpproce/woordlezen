@@ -21,7 +21,7 @@ export class DataService {
   }
 
   insertNewRemoteDataZin(tekst: string) {
-    return this.http.get('https://silvermusic.nl/test/apiBasic/write_zin.php?tekst="'+ tekst + '"');
+    return this.http.get('https://silvermusic.nl/test/apiBasic/write_zin.php?tekst='+ tekst );
   }
 
 }

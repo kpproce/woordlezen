@@ -31,12 +31,10 @@
           <ion-input  name="nivo" type="text" placeholder="tekst van deze zin" [(ngModel)]='zinTekst'> </ion-input>
         </ion-col>
         <ion-button (click)="addNewZinToDatabaseApi()" tooltip="nog invullen">
-          <ion-icon slot="icon-only" name="ion-save"></ion-icon>
+          <ion-icon slot="icon-only" name="save"></ion-icon>
         </ion-button>
       </ion-row>
-
     </ion-item>
 
-    {{resultFromDataService.actie}}<br>
-    {{resultFromDataService.tekst}}
+    --{{resultFromDataServiceTXT}}
   </ion-content>

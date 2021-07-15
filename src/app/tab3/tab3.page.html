@@ -13,5 +13,17 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+   <ion-grid>
+    <ion-row color="primary" justify-content-center  *ngFor="let zin of zinnen2; let i = index">
+      <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
+       {{zin.id}}
+      </ion-col>
+      <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
+        {{zin.nivo}}
+      </ion-col>
+      <ion-col align-self-center size-md="7" size-lg="6" size-xs="6"  >
+        {{zin.tekst}}
+       </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

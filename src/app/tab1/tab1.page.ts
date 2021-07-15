@@ -27,25 +27,9 @@ export class Tab1Page {
 
   geraden = [];
 
-
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-
-    this.dataService.getLocalData().subscribe(data => {
-      this.songs=data;
-      this.songs2=JSON.parse(JSON.stringify(data));
-      console.log('Local data:');
-      console.log(this.songs);
-      console.log('Local data (stringyfied and parsed):');
-      console.log(this.songs);
-    });
-
-    this.dataService.getRemoteData().subscribe(remoteData => {
-      console.log('Remote data:');
-      console.log(remoteData);
-      this.weather = remoteData;
-    });
 
     this.dataService.getRemoteDataZinnen().subscribe(data => {
       this.zinnen=data;
