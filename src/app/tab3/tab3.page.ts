@@ -13,12 +13,15 @@ export class Tab3Page {
   aantalZinnen = 0;
   zinnenIndex = 0;
 
+  resultFromDataService: any;
+  resultFromDataServiceTXT = 'geen update info';
+
   actualZin = 'geen data gevonden checkdata connectie';
 
   constructor(private dataService: DataService) {}
   ngOnInit() {
 
-    this.dataService.getRemoteDataZinnen().subscribe(data => {
+    this.dataService.getDataZinnen().subscribe(data => {
       this.zinnen=data;
       this.zinnen2=JSON.parse(JSON.stringify(data));
       this.aantalZinnen = this.zinnen2.length;
@@ -28,9 +31,17 @@ export class Tab3Page {
       console.log('Remote data zinnen (stringyfied and parsed):');
       console.log(this.zinnen2);
       this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
-
     });
 
+  }
+  handleClickDelete(id: string){
+      // de api wijzigt de deleted (zichtbaarheid)
+      //saveNewZin() {
+          this.dataService.updateDataZin(id).subscribe(result => {
+          this.resultFromDataService=result;
+          // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
+          this.resultFromDataServiceTXT = JSON.stringify(result);
+        });
   }
 
 }

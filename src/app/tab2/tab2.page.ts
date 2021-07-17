@@ -19,11 +19,10 @@ export class Tab2Page {
 
   addNewZinToDatabaseApi() {
   //saveNewZin() {
-    this.dataService.insertNewRemoteDataZin(this.zinTekst).subscribe(result => {
+    this.dataService.insertDataZin(this.zinTekst).subscribe(result => {
       this.resultFromDataService=result;
       // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
       this.resultFromDataServiceTXT = ' tekst opgeslagen';
     });
   }
-
 }

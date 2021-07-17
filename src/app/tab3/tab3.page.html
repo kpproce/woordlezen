@@ -15,15 +15,23 @@
 
    <ion-grid>
     <ion-row color="primary" justify-content-center  *ngFor="let zin of zinnen2; let i = index">
-      <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
+      <ion-button (click)="handleClickDelete(zin.id.toString())" tooltip="nog invullen">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>  <ion-col align-self-center size-md="1" size-lg="1" size-xs="2"  >
        {{zin.id}}
       </ion-col>
-      <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
+      <ion-col align-self-center size-md="1" size-lg="1" size-xs="1"  >
         {{zin.nivo}}
       </ion-col>
-      <ion-col align-self-center size-md="7" size-lg="6" size-xs="6"  >
+      <ion-col align-self-center size-md="5" size-lg="5" size-xs="5"  >
         {{zin.tekst}}
        </ion-col>
+       <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
+        <!-- {{zin.deleted}}==0?"":verwijderd -->
+        {{zin.deleted === '0' ? 'zichtbaar' : 'NIET zichtbaar'}}
+       </ion-col>
     </ion-row>
+    {{resultFromDataServiceTXT}}
+
   </ion-grid>
 </ion-content>
