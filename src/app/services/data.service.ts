@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class DataService {
 
-  lokaalTesten = true; // zet op true om localhost als API bron te gebruiken
+  lokaalTesten = false; // zet op true om localhost (test) als API bron te gebruiken
 
   constructor(private http: HttpClient) { }
 
@@ -19,19 +19,20 @@ export class DataService {
     return this.http.get('https://weerlive.nl/api/json-data-10min.php?key=demo&locatie=Amsterdam');
   }
 
-  getDataZinnen() {
+  getDataZinnen(deleted: string) {
     if (this.lokaalTesten) {
-      return this.http.get('http://localhost/php_api_test/apiBasic/read_zinnen.php');
+      return this.http.get('http://localhost/php_api_test/apiBasic/read_zinnen.php?showDeleted='+deleted);
     } else {
-      return this.http.get('https://silvermusic.nl/test/apiBasic/read_zinnen.php');
+      return this.http.get('https://silvermusic.nl/test/apiBasic/read_zinnen.php?showDeleted='+deleted);
     }
   }
 
   insertDataZin(tekst: string) {
+    const params = '?do=insert&tekst=' + tekst;
     if (this.lokaalTesten) {
-      return this.http.get('http://localhost/php_api_test/apiBasic/write_zin.php?tekst='+ tekst );
+      return this.http.get('http://localhost/php_api_test/apiBasic/write_zin.php'+ params );
     } else {
-      return this.http.get('https://silvermusic.nl/test/apiBasic/write_zin.php?tekst='+ tekst );
+      return this.http.get('https://silvermusic.nl/test/apiBasic/write_zin.php'+ params );
     }
   }
 

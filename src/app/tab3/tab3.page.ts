@@ -19,9 +19,9 @@ export class Tab3Page {
   actualZin = 'geen data gevonden checkdata connectie';
 
   constructor(private dataService: DataService) {}
-  ngOnInit() {
 
-    this.dataService.getDataZinnen().subscribe(data => {
+  ngOnInit() {
+    this.dataService.getDataZinnen('all').subscribe(data => {
       this.zinnen=data;
       this.zinnen2=JSON.parse(JSON.stringify(data));
       this.aantalZinnen = this.zinnen2.length;
@@ -41,7 +41,12 @@ export class Tab3Page {
           this.resultFromDataService=result;
           // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
           this.resultFromDataServiceTXT = JSON.stringify(result);
+          this.dataService.getDataZinnen('all').subscribe(data => {
+            this.zinnen=data;
+            this.zinnen2=JSON.parse(JSON.stringify(data));
+            this.aantalZinnen = this.zinnen2.length;
+            this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+          });
         });
   }
-
 }
