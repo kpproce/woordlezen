@@ -24,6 +24,7 @@ export class Tab1Page {
   verstreken = 0;
   intervalVar;
   startMoment = new Date();
+  maxTijd = 45;
 
   geraden = [];
 
@@ -43,13 +44,16 @@ export class Tab1Page {
       this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
       this.startTime();
     });
-
   }
 
   startTime() {
     if (this.aantalZinnen>0) {
       this.intervalVar = setInterval(function() {
         this.verstreken = (Math.floor(( new Date().valueOf() - this.startMoment.valueOf())/100)/10);
+        if (this.verstreken > this.maxTijd){
+          this.verstreken = 0;
+        }
+
       }.bind(this),400);
     }
   }

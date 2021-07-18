@@ -27,8 +27,8 @@ export class DataService {
     }
   }
 
-  insertDataZin(tekst: string) {
-    const params = '?do=insert&tekst=' + tekst;
+  insertDataZin(tekst: string, nivo: number) {
+    const params = '?do=insert&tekst=' + tekst + '&nivo=' + nivo;
     if (this.lokaalTesten) {
       return this.http.get('http://localhost/php_api_test/apiBasic/write_zin.php'+ params );
     } else {
