@@ -36,7 +36,17 @@ export class DataService {
     }
   }
 
-  updateDataZin(id: string) {
+  insertScore(userName: string, userWW: string, zinId: number, scoreTijd: number) {
+    const params = '?userName='+ userName + '&userWW=' + userWW + '&zinId=' + zinId + '&scoreTijd=' + scoreTijd;
+    // alert(params);
+    if (this.lokaalTesten) {
+      return this.http.get('http://localhost/php_api_test/apiBasic/write_score.php'+ params );
+    } else {
+      return this.http.get('https://silvermusic.nl/test/apiBasic/write_score.php'+ params );
+    }
+  }
+
+  updateDataZin(id: string) { // voorlopig alleen flipDeleted
     const params = '?id=' + id + '&do=flipDelete';
     if (this.lokaalTesten) {
       return this.http.get('http://localhost/php_api_test/apiBasic/write_zin.php'+ params);

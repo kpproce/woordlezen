@@ -2,6 +2,7 @@
   <ion-toolbar>
     <ion-title>
       Test leessnelheid {{this.aantalZinnen}} zinnen. Max {{maxTijd}} sec per zin
+      -- Ingelogd als Rien
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,22 +10,22 @@
 
   <ion-grid>
     <ion-row color="primary" justify-content-center>
-      <ion-col align-self-center size-md="8" size-lg="6" size-xs="6"  >
+      <ion-col align-self-center size-md="6" size-lg="6" size-xs="5"  >
         <h2>{{actualZin}}</h2>
       </ion-col>
 
-      <ion-col align-self-center size-md="1" size-lg="2" size-xs="2"  >
+      <ion-col align-self-center size-md="2" size-lg="2" size-xs="3"  >
         <ion-button (click)="nextZin()" tooltip="nog invullen">
           gelezen
         </ion-button>
       </ion-col>
 
-      <ion-col align-self-center size-md="1" size-lg="2" size-xs="2"  >
+      <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
         <ion-button (click)="resetTijd() " tooltip="nog invullen">
           <ion-icon slot="icon-only" name="refresh"></ion-icon>
         </ion-button>
       </ion-col>
-      <ion-col align-self-center size-md="1" size-lg="2" size-xs="2"  >
+      <ion-col align-self-center size-md="2" size-lg="2" size-xs="1"  >
         {{verstreken}}
       </ion-col>
     </ion-row>
@@ -34,10 +35,10 @@
 
   <ion-grid>
     <ion-row color="primary" justify-content-center  *ngFor="let geradenItem of geraden; let i = index">
-      <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
+      <ion-col align-self-center size-md="7" size-lg="5" size-xs="6"  >
        {{geradenItem.zin}}
        </ion-col>
-      <ion-col align-self-center size-md="7" size-lg="6" size-xs="6"  >
+      <ion-col align-self-center size-md="5" size-lg="5" size-xs="5"  >
          {{geradenItem.tijd}}
        </ion-col>
     </ion-row>

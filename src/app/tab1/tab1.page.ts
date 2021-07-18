@@ -24,9 +24,12 @@ export class Tab1Page {
   verstreken = 0;
   intervalVar;
   startMoment = new Date();
-  maxTijd = 45;
+  maxTijd = 30;
 
   geraden = [];
+
+  resultFromDataService: any;
+  resultFromDataServiceTXT = '-- geen info';
 
   constructor(private dataService: DataService) {}
 
@@ -46,6 +49,16 @@ export class Tab1Page {
     });
   }
 
+    addNewScoreToDatabaseApi() {
+      //saveNewZin() {
+        this.dataService.insertScore('Rien', 'Wilma61', this.zinnen2[this.zinnenIndex].id, this.verstreken).subscribe(result => {
+          this.resultFromDataService=result;
+          // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
+          this.resultFromDataServiceTXT = ' score opgeslagen';
+        });
+    }
+
+
   startTime() {
     if (this.aantalZinnen>0) {
       this.intervalVar = setInterval(function() {
@@ -53,7 +66,6 @@ export class Tab1Page {
         if (this.verstreken > this.maxTijd){
           this.verstreken = 0;
         }
-
       }.bind(this),400);
     }
   }
@@ -75,6 +87,7 @@ export class Tab1Page {
     this.startMoment = new Date();
     this.tijdVerstreken= (Math.floor((Date.now().valueOf() - this.startDate.valueOf())/100)/10);
     this.startDate = new Date();
+    this.addNewScoreToDatabaseApi();
   }
 
   mapData(){
