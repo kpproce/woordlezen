@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      {{this.aantalZinnen}} zinnen. Lees --> klik op 1e button
+      Test leessnelheid {{this.aantalZinnen}} zinnen. Max {{maxTijd}} sec per zin
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -15,7 +15,7 @@
 
       <ion-col align-self-center size-md="1" size-lg="2" size-xs="2"  >
         <ion-button (click)="nextZin()" tooltip="nog invullen">
-          <ion-icon slot="icon-only" name="aperture"></ion-icon>
+          gelezen
         </ion-button>
       </ion-col>
 
