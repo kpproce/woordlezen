@@ -10,10 +10,9 @@
 
   <ion-grid>
     <ion-row color="primary" justify-content-center>
-      <ion-col align-self-center size-md="6" size-lg="6" size-xs="5"  >
-        <h2>{{actualZin}}</h2>
-      </ion-col>
-
+      <h2 [style.color]="zinStyle" class="padleft"> {{actualZin}}</h2>
+    </ion-row>
+    <ion-row color="primary" justify-content-center>
       <ion-col align-self-center size-md="2" size-lg="2" size-xs="3"  >
         <ion-button (click)="nextZin()" tooltip="nog invullen">
           gelezen
@@ -25,8 +24,8 @@
           <ion-icon slot="icon-only" name="refresh"></ion-icon>
         </ion-button>
       </ion-col>
-      <ion-col align-self-center size-md="2" size-lg="2" size-xs="1"  >
-        {{verstreken}}
+      <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
+       <h2>{{verstreken}}</h2>
       </ion-col>
     </ion-row>
   </ion-grid>

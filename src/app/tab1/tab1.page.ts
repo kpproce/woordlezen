@@ -24,7 +24,9 @@ export class Tab1Page {
   verstreken = 0;
   intervalVar;
   startMoment = new Date();
-  maxTijd = 30;
+  maxTijd = 20;
+  warningTijd = 6;
+  zinStyle = 'rgb(10, 10, 10)';
 
   geraden = [];
 
@@ -63,8 +65,15 @@ export class Tab1Page {
     if (this.aantalZinnen>0) {
       this.intervalVar = setInterval(function() {
         this.verstreken = (Math.floor(( new Date().valueOf() - this.startMoment.valueOf())/100)/10);
+        if (this.verstreken > this.warningTijd){
+          this.zinStyle = 'rgb(240, 225, 222)';
+        };
+        if (this.verstreken  > this.warningTijd +3){
+          this.zinStyle = 'rgb(242, 235, 232)';
+        };
         if (this.verstreken > this.maxTijd){
           this.verstreken = 0;
+          this.zinStyle = 'rgb(255, 1, 1)';
         }
       }.bind(this),400);
     }
@@ -80,6 +89,7 @@ export class Tab1Page {
     this.startMoment = new Date();
     this.tijdVerstreken= (Math.floor((Date.now().valueOf() - this.startDate.valueOf())/100)/10);
     this.startDate = new Date();
+    this.zinStyle =  'rgb(10, 10, 10)';
   }
 
   hoelang(){
@@ -107,6 +117,7 @@ export class Tab1Page {
       }
       this.hoelang();
       this.verwerkTijd();
+      this.zinStyle = 'rgb(10, 10, 10)';
       this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
     }
     else {
