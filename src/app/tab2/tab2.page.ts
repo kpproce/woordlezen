@@ -22,7 +22,7 @@ export class Tab2Page {
     this.dataService.insertDataZin(this.zinTekst, this.zinNivo).subscribe(result => {
       this.resultFromDataService=result;
       // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
-      this.resultFromDataServiceTXT = ' tekst opgeslagen';
+      this.resultFromDataServiceTXT = 'OPGESLAGEN: ' + this.zinTekst;
     });
   }
 }

@@ -19,20 +19,21 @@ export class DataService {
     return this.http.get('https://weerlive.nl/api/json-data-10min.php?key=demo&locatie=Amsterdam');
   }
 
-  getDataZinnen(deleted: string) {
+  getDataZinnen(deleted: string, order: string) {
+    const params = '?showDeleted=' + deleted + '&order=' + order;
     if (this.lokaalTesten) {
-      return this.http.get('http://localhost/php_api_test/apiBasic/read_zinnen.php?showDeleted='+deleted);
+      return this.http.get('http://localhost/php_api_test/apiBasic/read_zinnen.php' + params );
     } else {
-      return this.http.get('https://silvermusic.nl/test/apiBasic/read_zinnen.php?showDeleted='+deleted);
+      return this.http.get('https://silvermusic.nl/test/apiBasic/read_zinnen.php' + params );
     }
   }
 
   insertDataZin(tekst: string, nivo: number) {
     const params = '?do=insert&tekst=' + tekst + '&nivo=' + nivo;
     if (this.lokaalTesten) {
-      return this.http.get('http://localhost/php_api_test/apiBasic/write_zin.php'+ params );
+      return this.http.get('http://localhost/php_api_test/apiBasic/write_zin.php' + params );
     } else {
-      return this.http.get('https://silvermusic.nl/test/apiBasic/write_zin.php'+ params );
+      return this.http.get('https://silvermusic.nl/test/apiBasic/write_zin.php' + params );
     }
   }
 
@@ -40,9 +41,9 @@ export class DataService {
     const params = '?userName='+ userName + '&userWW=' + userWW + '&zinId=' + zinId + '&scoreTijd=' + scoreTijd;
     // alert(params);
     if (this.lokaalTesten) {
-      return this.http.get('http://localhost/php_api_test/apiBasic/write_score.php'+ params );
+      return this.http.get('http://localhost/php_api_test/apiBasic/write_score.php' + params );
     } else {
-      return this.http.get('https://silvermusic.nl/test/apiBasic/write_score.php'+ params );
+      return this.http.get('https://silvermusic.nl/test/apiBasic/write_score.php' + params );
     }
   }
 

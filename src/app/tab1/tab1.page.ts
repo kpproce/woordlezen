@@ -37,7 +37,7 @@ export class Tab1Page {
 
   ngOnInit() {
 
-    this.dataService.getDataZinnen('nee').subscribe(data => {
+    this.dataService.getDataZinnen('nee','random').subscribe(data => {
       this.zinnen=data;
       this.zinnen2=JSON.parse(JSON.stringify(data));
       this.aantalZinnen = this.zinnen2.length;
