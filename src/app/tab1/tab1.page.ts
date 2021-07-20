@@ -26,11 +26,13 @@ export class Tab1Page {
   intervalVar;
   startMoment = new Date();
   maxTijd = 20;
-  warningTijd = 7;
-  warningTijd2 = 3;
+  warningTijd = 5;
+  warningTijd2 = 8;
   duurFactor = 0;
 
-  snelheid = 'langzaam'; // slak, langzaam, normaal, snel, jaguar
+  info = '';
+
+  snelheid = 'normaal'; // slak, langzaam, normaal, snel, jaguar
   zinStyle = 'rgb(10, 10, 10)';
 
   geraden = [];
@@ -59,11 +61,11 @@ export class Tab1Page {
   }
     onchangeSnelheid(){
       // alert(this.snelheid);
-      if (this.snelheid==='slak') { this.warningTijd = 10; this.warningTijd2 = 14;  }
-      if (this.snelheid==='langzaam') { this.warningTijd = 7; this.warningTijd2 = 11;  }
-      if (this.snelheid==='normaal') {  this.warningTijd = 4; this.warningTijd2 = 6;  }
-      if (this.snelheid==='snel') {  this.warningTijd = 2; this.warningTijd2 = 3;  }
-      if (this.snelheid==='jaguar') {  this.warningTijd = 0.4; this.warningTijd2 = 1;  }
+      if (this.snelheid==='slak') { this.warningTijd = 10; this.warningTijd2 = 14; this.maxTijd = 20; }
+      if (this.snelheid==='langzaam') { this.warningTijd = 7; this.warningTijd2 = 11;  this.maxTijd = 15;}
+      if (this.snelheid==='normaal') {  this.warningTijd = 5; this.warningTijd2 = 8; this.maxTijd = 12; }
+      if (this.snelheid==='snel') {  this.warningTijd = 3; this.warningTijd2 = 5; this.maxTijd = 10; }
+      if (this.snelheid==='jaguar') {  this.warningTijd = 0.5; this.warningTijd2 = 1; this.maxTijd = 3; }
     }
 
     addNewScoreToDatabaseApi() {
@@ -80,15 +82,15 @@ export class Tab1Page {
       this.intervalVar = setInterval(function() {
         this.verstreken = (Math.floor(( new Date().valueOf() - this.startMoment.valueOf())/100)/10);
         this.duurFactor = 1 + (this.actualNivo -2 )/5;
-        if (this.verstreken > (this.warningTijd * this.actualNivo)){
-          this.zinStyle = 'rgb(240, 230, 228)';
+        if (this.verstreken > (this.warningTijd * this. duurFactor)){
+          this.zinStyle = 'rgb(236, 230, 228)';
         };
-        if (this.verstreken  > (this.warningTijd2 * this.actualNivo) ){
-          this.zinStyle = 'rgb(242, 232, 231)';
+        if (this.verstreken  > (this.warningTijd2 * this. duurFactor) ){
+          this.zinStyle = 'rgb(255, 250, 250)';
         };
         if (this.verstreken > this.maxTijd){
           this.verstreken = 0;
-          this.zinStyle = 'rgb(255, 1, 1)';
+          this.zinStyle = 'rgb(250, 1, 1)';
           // backgroud 245, 244, 237
         }
       }.bind(this),400);

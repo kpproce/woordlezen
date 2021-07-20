@@ -12,11 +12,13 @@ export class Tab3Page {
   zinnen2;
   aantalZinnen = 0;
   zinnenIndex = 0;
+  zinTekst ='leeg';
 
   resultFromDataService: any;
   resultFromDataServiceTXT = 'geen update info';
 
   actualZin = 'geen data gevonden checkdata connectie';
+  info= '';
 
   constructor(private dataService: DataService) {}
 
@@ -48,5 +50,9 @@ export class Tab3Page {
             this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
           });
         });
+  }
+
+  onchangeInput(id) {
+    this.info = id + ' is aangepast';
   }
 }
