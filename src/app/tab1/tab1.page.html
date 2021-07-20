@@ -3,6 +3,17 @@
     <ion-title>
       Test leessnelheid {{this.aantalZinnen}} zinnen. Max {{maxTijd}} sec per zin
       -- Ingelogd als Rien
+      <br>
+      <span
+        class="small">
+        <ion-select placeholder="Select One" [(ngModel)]='snelheid'> snelheid
+          <ion-select-option value="slak">speed slak</ion-select-option>
+          <ion-select-option value="langzaam">speed langzaam</ion-select-option>
+          <ion-select-option value="normaal">speed normaal</ion-select-option>
+          <ion-select-option value="snel">speed snel</ion-select-option>
+          <ion-select-option value="jaguar">speed jaguar</ion-select-option>
+        </ion-select>
+      </span>
     </ion-title>
   </ion-toolbar>
 </ion-header>

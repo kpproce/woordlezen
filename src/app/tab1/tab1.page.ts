@@ -26,6 +26,7 @@ export class Tab1Page {
   startMoment = new Date();
   maxTijd = 20;
   warningTijd = 6;
+  snelheid = 'langzaam'; // slak, langzaam, normaal, snel, jaguar
   zinStyle = 'rgb(10, 10, 10)';
 
   geraden = [];
@@ -65,6 +66,11 @@ export class Tab1Page {
     if (this.aantalZinnen>0) {
       this.intervalVar = setInterval(function() {
         this.verstreken = (Math.floor(( new Date().valueOf() - this.startMoment.valueOf())/100)/10);
+        if (this.snelheid==='slak') { this.warningTijd = 10;}
+        if (this.snelheid==='langzaam') { this.warningTijd = 7; }
+        if (this.snelheid==='normaal') {  this.warningTijd = 4; }
+        if (this.snelheid==='snel') {  this.warningTijd = 2; }
+        if (this.snelheid==='jaguar') {  this.warningTijd = 0.4; }
         if (this.verstreken > this.warningTijd){
           this.zinStyle = 'rgb(240, 225, 222)';
         };
