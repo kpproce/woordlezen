@@ -6,13 +6,14 @@
       <br>
       <span
         class="small">
-        <ion-select placeholder="Select One" [(ngModel)]='snelheid'> snelheid
+        <ion-select placeholder="Select One" [(ngModel)]='snelheid' (ionChange)="onchangeSnelheid()"> snelheid
           <ion-select-option value="slak">speed slak</ion-select-option>
           <ion-select-option value="langzaam">speed langzaam</ion-select-option>
           <ion-select-option value="normaal">speed normaal</ion-select-option>
           <ion-select-option value="snel">speed snel</ion-select-option>
           <ion-select-option value="jaguar">speed jaguar</ion-select-option>
         </ion-select>
+        info (testen) {{snelheid}} {{warningTijd}} {{warningTijd2}} {{actualNivo}} --nivopercentage:- {{(duurFactor)}}
       </span>
     </ion-title>
   </ion-toolbar>
@@ -21,7 +22,7 @@
 
   <ion-grid>
     <ion-row color="primary" justify-content-center>
-      <h2 [style.color]="zinStyle" class="padleft"> {{actualZin}}</h2>
+      <h2 [style.color]="zinStyle" class="padleft"> {{actualNivo}}: {{actualZin}} </h2>
     </ion-row>
     <ion-row color="primary" justify-content-center>
       <ion-col align-self-center size-md="2" size-lg="2" size-xs="3"  >

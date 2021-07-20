@@ -19,13 +19,17 @@ export class Tab1Page {
 
   zinnenIndex = 0;
   actualZin = 'geen data gevonden checkdata connectie';
+  actualNivo =-1;
 
   nu = new Date();
   verstreken = 0;
   intervalVar;
   startMoment = new Date();
   maxTijd = 20;
-  warningTijd = 6;
+  warningTijd = 7;
+  warningTijd2 = 3;
+  duurFactor = 0;
+
   snelheid = 'langzaam'; // slak, langzaam, normaal, snel, jaguar
   zinStyle = 'rgb(10, 10, 10)';
 
@@ -48,9 +52,19 @@ export class Tab1Page {
       console.log('Remote data zinnen (stringyfied and parsed):');
       console.log(this.zinnen2);
       this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+      this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
+      // alert( this.actualNivo + ' type: ' + typeof this.actualNivo + '  ' + this.warningTijd2 + ' type: ' + typeof this.warningTijd2 );
       this.startTime();
     });
   }
+    onchangeSnelheid(){
+      // alert(this.snelheid);
+      if (this.snelheid==='slak') { this.warningTijd = 10; this.warningTijd2 = 14;  }
+      if (this.snelheid==='langzaam') { this.warningTijd = 7; this.warningTijd2 = 11;  }
+      if (this.snelheid==='normaal') {  this.warningTijd = 4; this.warningTijd2 = 6;  }
+      if (this.snelheid==='snel') {  this.warningTijd = 2; this.warningTijd2 = 3;  }
+      if (this.snelheid==='jaguar') {  this.warningTijd = 0.4; this.warningTijd2 = 1;  }
+    }
 
     addNewScoreToDatabaseApi() {
       //saveNewZin() {
@@ -61,25 +75,21 @@ export class Tab1Page {
         });
     }
 
-
   startTime() {
     if (this.aantalZinnen>0) {
       this.intervalVar = setInterval(function() {
         this.verstreken = (Math.floor(( new Date().valueOf() - this.startMoment.valueOf())/100)/10);
-        if (this.snelheid==='slak') { this.warningTijd = 10;}
-        if (this.snelheid==='langzaam') { this.warningTijd = 7; }
-        if (this.snelheid==='normaal') {  this.warningTijd = 4; }
-        if (this.snelheid==='snel') {  this.warningTijd = 2; }
-        if (this.snelheid==='jaguar') {  this.warningTijd = 0.4; }
-        if (this.verstreken > this.warningTijd){
-          this.zinStyle = 'rgb(240, 225, 222)';
+        this.duurFactor = 1 + (this.actualNivo -2 )/5;
+        if (this.verstreken > (this.warningTijd * this.actualNivo)){
+          this.zinStyle = 'rgb(240, 230, 228)';
         };
-        if (this.verstreken  > this.warningTijd +3){
-          this.zinStyle = 'rgb(242, 235, 232)';
+        if (this.verstreken  > (this.warningTijd2 * this.actualNivo) ){
+          this.zinStyle = 'rgb(242, 232, 231)';
         };
         if (this.verstreken > this.maxTijd){
           this.verstreken = 0;
           this.zinStyle = 'rgb(255, 1, 1)';
+          // backgroud 245, 244, 237
         }
       }.bind(this),400);
     }
@@ -125,6 +135,8 @@ export class Tab1Page {
       this.verwerkTijd();
       this.zinStyle = 'rgb(10, 10, 10)';
       this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+      this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
+      this.duurFactor = 1 + (this.actualNivo -2 )/5;
     }
     else {
       this.actualZin = 'geen data gevonden checkdata connectie';
