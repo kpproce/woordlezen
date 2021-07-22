@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class DataService {
 
-  lokaalTesten = true; // zet op true om localhost (test) als API bron te gebruiken
+  lokaalTesten = false; // zet op true om localhost (test) als API bron te gebruiken
 
   constructor(private http: HttpClient) { }
 
@@ -23,6 +23,7 @@ export class DataService {
     const params = '?showDeleted=' + deleted + '&order=' + order;
     if (this.lokaalTesten) {
       return this.http.get('http://localhost/php_api_test/apiBasic/read_zinnen.php' + params );
+      //http://localhost/php_api_test/apiBasic/read_zinnen.php?showDeleted=all&order=random;
     } else {
       return this.http.get('https://silvermusic.nl/test/apiBasic/read_zinnen.php' + params );
     }
