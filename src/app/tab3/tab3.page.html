@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Bekijk alle zinnen, wijzig zichtbaarheid {{info}}
+      Wijzig tekst, of zichtbaarheid {{info}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -15,19 +15,23 @@
 
    <ion-grid>
     <ion-row color="primary" justify-content-center  *ngFor="let zin of zinnen2; let i = index">
-      <ion-button (click)="handleClickDelete(zin.id.toString())" tooltip="nog invullen">
-         {{zin.deleted==='1'?'X deleted':'zichtbaar'}}
-             <!-- <ion-icon slot="icon-only" name="trash"></ion-icon> -->
-         </ion-button>
-      <ion-col align-self-center size-md="1" size-lg="1" size-xs="2"  >
+
+      <ion-col align-self-center size-xs="2" size-md="2" size-lg="2"  >
+        <ion-button (click)="handleClickDelete(zin.id.toString())" tooltip="nog invullen">
+          {{zin.deleted==='1'?'X Show':'& Del!'}}
+              <!-- <ion-icon slot="icon-only" name="trash"></ion-icon> -->
+          </ion-button>
+       </ion-col>
+
+      <ion-col align-self-center size-xs="1" size-md="1" size-lg="1"  >
        {{zin.id}}
       </ion-col>
-      <ion-col align-self-center size-md="1" size-lg="1" size-xs="1"  >
+      <ion-col align-self-center size-xs="1" size-md="1" size-lg="1"   >
         {{zin.nivo}}
       </ion-col>
-      <ion-col align-self-center size-md="5" size-lg="5" size-xs="5"  >
+      <ion-col align-self-center size-xs="8" size-md="8" size-lg="8"  >
         <ion-input  name="nivo" type="text" placeholder="tekst van deze zin"
-          [(ngModel)]='zinnen2[i].tekst' (ionChange)="onchangeInput(zin.id)"></ion-input>
+          [(ngModel)]='zinnen2[i].tekst' (ionBlur)="onBlurInput(zin.id, zinnen2[i].tekst)" (ionChange)="onchangeInput(zin.id)"></ion-input>
        </ion-col>
         <!--  <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
               {{zin.deleted === '0' ? 'zichtbaar' : 'NIET zichtbaar'}}

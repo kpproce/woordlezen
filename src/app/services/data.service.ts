@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class DataService {
 
-  lokaalTesten = false; // zet op true om localhost (test) als API bron te gebruiken
+  lokaalTesten = true; // zet op true om localhost (test) als API bron te gebruiken
 
   constructor(private http: HttpClient) { }
 
@@ -47,7 +47,7 @@ export class DataService {
     }
   }
 
-  updateDataZin(id: string) { // voorlopig alleen flipDeleted
+  flipDataDelete(id: string) { // voorlopig alleen flipDeleted
     const params = '?id=' + id + '&do=flipDelete';
     if (this.lokaalTesten) {
       return this.http.get('http://localhost/php_api_test/apiBasic/write_zin.php'+ params);
@@ -56,4 +56,12 @@ export class DataService {
     }
   }
 
+  updateDataTekst(id: string, tekst: string) { //
+    const params = '?id=' + id + '&tekst=' + tekst + '&do=update';
+    if (this.lokaalTesten) {
+      return this.http.get('http://localhost/php_api_test/apiBasic/write_zin.php'+ params);
+    } else {
+      return this.http.get('https://silvermusic.nl/test/apiBasic/write_zin.php'+ params);
+    }
+  }
 }

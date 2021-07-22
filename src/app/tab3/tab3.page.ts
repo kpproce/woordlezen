@@ -8,6 +8,8 @@ import { DataService } from '../services/data.service';
 })
 export class Tab3Page {
 
+  teller = 0;
+  idVanAangepasteZin = 0;
   zinnen;
   zinnen2;
   aantalZinnen = 0;
@@ -18,7 +20,7 @@ export class Tab3Page {
   resultFromDataServiceTXT = 'geen update info';
 
   actualZin = 'geen data gevonden checkdata connectie';
-  info= '';
+  info= '---';
 
   constructor(private dataService: DataService) {}
 
@@ -37,22 +39,44 @@ export class Tab3Page {
 
   }
   handleClickDelete(id: string){
-      // de api wijzigt de deleted (zichtbaarheid)
-      //saveNewZin() {
-          this.dataService.updateDataZin(id).subscribe(result => {
-          this.resultFromDataService=result;
-          // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
-          this.resultFromDataServiceTXT = JSON.stringify(result);
-          this.dataService.getDataZinnen('all','id').subscribe(data => {
-            this.zinnen=data;
-            this.zinnen2=JSON.parse(JSON.stringify(data));
-            this.aantalZinnen = this.zinnen2.length;
-            this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
-          });
-        });
+    // de api wijzigt de deleted (zichtbaarheid)
+    //saveNewZin() {
+    this.dataService.flipDataDelete(id).subscribe(result => {
+      this.resultFromDataService=result;
+      // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
+      this.resultFromDataServiceTXT = JSON.stringify(result);
+      this.dataService.getDataZinnen('all','id').subscribe(data => {
+        this.zinnen=data;
+        this.zinnen2=JSON.parse(JSON.stringify(data));
+        this.aantalZinnen = this.zinnen2.length;
+        this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+      });
+    });
+  }
+
+  handleUpdateTekst(id: string, tekst: string){
+    // de api wijzigt de deleted (zichtbaarheid)
+    //saveNewZin() {
+    this.dataService.updateDataTekst(id, tekst).subscribe(result => {
+      this.resultFromDataService=result;
+      // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
+      this.resultFromDataServiceTXT = JSON.stringify(result);
+    });
   }
 
   onchangeInput(id) {
-    this.info = id + ' is aangepast';
+    this.teller +=1;
+    this.idVanAangepasteZin=id;
+    this.info = id + ' (' + this.teller + ') keer Tekst is aangepast: ' +  this.idVanAangepasteZin;
+  }
+  onBlurInput(id, tekst) {
+    this.teller +=1;
+    if (this.idVanAangepasteZin===id) {
+      this.info = id + ' (' + this.idVanAangepasteZin + ') Wijziging opslab: ' + tekst;
+      this.handleUpdateTekst(id, tekst);
+
+    }
+    this.idVanAangepasteZin = 0;
+    this.teller = 0;
   }
 }

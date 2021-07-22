@@ -42,8 +42,7 @@ export class Tab1Page {
 
   constructor(private dataService: DataService) {}
 
-  ngOnInit() {
-
+  getZinnen() {
     this.dataService.getDataZinnen('nee','random').subscribe(data => {
       this.zinnen=data;
       this.zinnen2=JSON.parse(JSON.stringify(data));
@@ -57,7 +56,12 @@ export class Tab1Page {
       this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
       // alert( this.actualNivo + ' type: ' + typeof this.actualNivo + '  ' + this.warningTijd2 + ' type: ' + typeof this.warningTijd2 );
       this.startTime();
+      this.geraden = [];
     });
+  }
+
+  ngOnInit() {
+   this.getZinnen();
   }
     onchangeSnelheid(){
       // alert(this.snelheid);
