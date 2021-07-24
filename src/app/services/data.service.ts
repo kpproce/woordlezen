@@ -7,7 +7,12 @@ import { HttpClient } from '@angular/common/http';
 
 export class DataService {
 
-  lokaalTesten = false; // zet op true om localhost (test) als API bron te gebruiken
+  // **********   LOKAAL TESTEN?   **************************************************
+    lokaalTesten = true; // zet op true om localhost (test) als API bron te gebruiken
+  // ********************************************************************************
+
+  userName = 'Rien';
+  userWW = 'wachtwoord';
 
   constructor(private http: HttpClient) { }
 
@@ -29,8 +34,8 @@ export class DataService {
     }
   }
 
-  insertDataZin(tekst: string, nivo: number) {
-    const params = '?do=insert&tekst=' + tekst + '&nivo=' + nivo;
+  insertDataZin(userName: string, userWW: string, tekst: string, nivo: number) {
+    const params = '?userName='+ userName + '&userWW=' + userWW + '&do=insert&tekst=' + tekst + '&nivo=' + nivo;
     if (this.lokaalTesten) {
       return this.http.get('http://localhost/php_api_test/apiBasic/write_zin.php' + params );
     } else {
@@ -48,8 +53,8 @@ export class DataService {
     }
   }
 
-  flipDataDelete(id: string) { // voorlopig alleen flipDeleted
-    const params = '?id=' + id + '&do=flipDelete';
+  flipDataDelete(userName: string, userWW: string, id: string) { // voorlopig alleen flipDeleted
+    const params = '?userName='+ userName + '&userWW=' + userWW + '&id=' + id + '&do=flipDelete';
     if (this.lokaalTesten) {
       return this.http.get('http://localhost/php_api_test/apiBasic/write_zin.php'+ params);
     } else {
@@ -57,8 +62,8 @@ export class DataService {
     }
   }
 
-  updateDataTekst(id: string, tekst: string) { //
-    const params = '?id=' + id + '&tekst=' + tekst + '&do=update';
+  updateDataTekst(userName: string, userWW: string, id: string, tekst: string) { //
+    const params = '?userName='+ userName + '&userWW=' + userWW + '&id=' + id + '&tekst=' + tekst + '&do=update';
     if (this.lokaalTesten) {
       return this.http.get('http://localhost/php_api_test/apiBasic/write_zin.php'+ params);
     } else {

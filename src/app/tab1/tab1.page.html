@@ -1,24 +1,41 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Test leessnelheid {{this.aantalZinnen}} zinnen. Max {{maxTijd}} sec per zin
-      -- Ingelogd als Rien
-      <br>
-      <span
-        class="small">
-        <ion-select placeholder="Select One" [(ngModel)]='snelheid' (ionChange)="onchangeSnelheid()"> snelheid
-          <ion-select-option value="slak">speed slak</ion-select-option>
-          <ion-select-option value="langzaam">speed langzaam</ion-select-option>
-          <ion-select-option value="normaal">speed normaal</ion-select-option>
-          <ion-select-option value="snel">speed snel</ion-select-option>
-          <ion-select-option value="jaguar">speed jaguar</ion-select-option>
-        </ion-select>
-        <!-- info (testen) {{snelheid}} {{warningTijd}} {{warningTijd2}} {{actualNivo}} --nivopercentage:- {{(duurFactor)}} -->
-      </span>
-      <ion-button (click)="getZinnen()" tooltip="nog invullen">
-        Reload
-      </ion-button>
 
+      <ion-grid>
+        <ion-row color="primary" justify-content-center>
+
+          <ion-col align-self-center size-xs="6"size-md="6" size-lg="6">
+            Test leessnelheid {{this.aantalZinnen}} zinnen.
+          </ion-col>
+          <ion-col align-self-center size-xs="2"size-md="2" size-lg="2">
+            <ion-input name="userName" class="small login" type="text" placeholder="userName" [(ngModel)]='dataService.userName'> </ion-input>
+          </ion-col>
+          <ion-col align-self-center size-xs="3"size-md="3" size-lg="3">
+            <ion-input name="userWW" class="small login" type="text" placeholder="wachtwoord" [(ngModel)]='dataService.userWW'> </ion-input>
+          </ion-col>
+
+        </ion-row>
+        <ion-row color="primary" justify-content-center>
+          <ion-col align-self-center  size-xs="3" size-md="3" size-lg="3">
+            <ion-select class="small" placeholder="Select One" [(ngModel)]='snelheid' (ionChange)="onchangeSnelheid()"> snelheid
+              <ion-select-option value="slak">speed slak</ion-select-option>
+              <ion-select-option value="langzaam">speed langzaam</ion-select-option>
+              <ion-select-option value="normaal">speed normaal</ion-select-option>
+              <ion-select-option value="snel">speed snel</ion-select-option>
+              <ion-select-option value="jaguar">speed jaguar</ion-select-option>
+            </ion-select>
+          </ion-col>
+
+        <ion-col align-self-center size-xs="2"size-md="2" size-lg="2">
+          <ion-button class="x-small" (click)="getZinnen()" tooltip="nog invullen">
+            Reload
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      </ion-grid>
+        <!-- info (testen) {{snelheid}} {{warningTijd}} {{warningTijd2}} {{actualNivo}} --nivopercentage:- {{(duurFactor)}} -->
     </ion-title>
   </ion-toolbar>
 </ion-header>

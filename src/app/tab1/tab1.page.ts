@@ -48,6 +48,7 @@ export class Tab1Page {
       this.zinnen2=JSON.parse(JSON.stringify(data));
       this.aantalZinnen = this.zinnen2.length;
 
+
       console.log('remote data zinnen:');
       console.log(this.zinnen);
       console.log('Remote data zinnen (stringyfied and parsed):');
@@ -55,6 +56,7 @@ export class Tab1Page {
       this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
       this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
       // alert( this.actualNivo + ' type: ' + typeof this.actualNivo + '  ' + this.warningTijd2 + ' type: ' + typeof this.warningTijd2 );
+      this. resetTijd();
       this.startTime();
       this.geraden = [];
     });
@@ -65,6 +67,7 @@ export class Tab1Page {
   }
     onchangeSnelheid(){
       // alert(this.snelheid);
+      // nivo 1 = *  0,8      // nivo 2 = *  1      // nivo 3 = *  1,2      // nivo 4 = *  1,4
       if (this.snelheid==='slak') { this.warningTijd = 10; this.warningTijd2 = 14; this.maxTijd = 20; }
       if (this.snelheid==='langzaam') { this.warningTijd = 7; this.warningTijd2 = 11;  this.maxTijd = 15;}
       if (this.snelheid==='normaal') {  this.warningTijd = 5; this.warningTijd2 = 8; this.maxTijd = 12; }

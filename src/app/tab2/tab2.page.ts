@@ -19,10 +19,10 @@ export class Tab2Page {
 
   addNewZinToDatabaseApi() {
   //saveNewZin() {
-    this.dataService.insertDataZin(this.zinTekst, this.zinNivo).subscribe(result => {
+    this.dataService.insertDataZin(this.dataService.userName, this.dataService.userWW, this.zinTekst, this.zinNivo).subscribe(result => {
       this.resultFromDataService=result;
       // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
-      this.resultFromDataServiceTXT = 'OPGESLAGEN: ' + this.zinTekst;
+      this.resultFromDataServiceTXT = this.resultFromDataService.message;
     });
   }
 }

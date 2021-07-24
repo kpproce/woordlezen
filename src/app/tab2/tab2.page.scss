@@ -8,3 +8,34 @@ ion-input {
   color:rgb(1, 7, 15);
   font-size: larger;
 }
+
+ion-select {
+  background-color: rgb(231, 228, 245);
+  color:rgb(5, 1, 20);
+}
+
+.small{
+  font-size: small;
+}
+
+.x-small{
+  font-size: x-small;
+}
+
+.login{
+  background-color: rgb(203, 214, 213);
+}
+
+@media screen and (min-width: 640px){
+  ion-select {
+    font-size: large;
+  }
+  .small{
+    font-size: 1rem;
+  }
+
+  .x-small{
+    font-size: small;
+  }
+
+}

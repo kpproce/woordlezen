@@ -1,7 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Wijzig tekst, of zichtbaarheid {{info}}
+      <ion-row>
+        <ion-col class="small"  align-self-center size-xs="6"size-md="6" size-lg="6">
+          Wijzig tekst, of zichtbaarheid <br> {{info}}
+        </ion-col>
+        <ion-col align-self-center size-xs="2"size-md="2" size-lg="2">
+          <ion-input name="userName" class="small login" type="text" placeholder="userName" [(ngModel)]='dataService.userName'> </ion-input>
+        </ion-col>
+        <ion-col align-self-center size-xs="3"size-md="3" size-lg="3">
+          <ion-input name="userWW" class="small login" type="text" placeholder="wachtwoord" [(ngModel)]='dataService.userWW'> </ion-input>
+        </ion-col>
+      </ion-row>
     </ion-title>
   </ion-toolbar>
 </ion-header>
