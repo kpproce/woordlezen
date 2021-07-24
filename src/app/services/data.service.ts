@@ -8,7 +8,9 @@ import { HttpClient } from '@angular/common/http';
 export class DataService {
 
   // **********   LOKAAL TESTEN?   **************************************************
-    lokaalTesten = true; // zet op true om localhost (test) als API bron te gebruiken
+
+  lokaalTesten = false; // zet op true om localhost (test) als API bron te gebruiken
+
   // ********************************************************************************
 
   userName = 'Rien';
