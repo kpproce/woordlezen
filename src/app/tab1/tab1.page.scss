@@ -25,6 +25,8 @@ ion-select {
 
 .login{
   background-color: rgb(203, 214, 213);
+  width: 5REM;
+  height: 1.8REM;
 }
 
 @media screen and (min-width: 640px){
@@ -32,11 +34,17 @@ ion-select {
     font-size: large;
   }
   .small{
-    font-size: 1rem;
+    font-size: medium;
   }
 
   .x-small{
     font-size: small;
+  }
+
+  .login{
+    background-color: rgb(203, 214, 213);
+    width: 7REM;
+    height: 2.2REM;
   }
 
 }
