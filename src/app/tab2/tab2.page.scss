@@ -14,6 +14,9 @@ ion-select {
   color:rgb(5, 1, 20);
 }
 
+.lightRed { background-color: rgb(236, 193, 193); }
+.lightGreen { background-color: rgb(193, 236, 202); }
+
 .small{
   font-size: small;
 }
@@ -23,13 +26,20 @@ ion-select {
 }
 
 .login{
-  background-color: rgb(203, 214, 213);
+  width: 5REM;
+  height: 1.8REM;
 }
 
 @media screen and (min-width: 640px){
   ion-select {
     font-size: large;
   }
+
+  .login{
+    width: 7REM;
+    height: 2.2REM;
+  }
+
   .small{
     font-size: 1rem;
   }

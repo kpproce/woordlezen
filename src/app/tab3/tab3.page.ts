@@ -54,6 +54,7 @@ export class Tab3Page {
       });
       const result2= JSON.parse(this.resultFromDataServiceTXT);
       this.dataOpgeslagen = (result2.ingelogd==='ja');
+      this.dataService.lastEditRights  =  this.dataOpgeslagen; // dit moet cleaner..
       if (this.dataOpgeslagen) {
         this.info = 'wijzig zichtbaarheid opgeslagen ';
       } else {
@@ -73,6 +74,7 @@ export class Tab3Page {
 
       const result2= JSON.parse(this.resultFromDataServiceTXT);
       this.dataOpgeslagen = (result2.ingelogd==='ja');
+      this.dataService.lastEditRights  =  this.dataOpgeslagen; // dit moet cleaner..
       if (this.dataOpgeslagen) {
         this.info = this.info +  ' opgeslagen ';
       } else {

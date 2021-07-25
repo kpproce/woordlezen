@@ -9,17 +9,22 @@ export class DataService {
 
   // **********   LOKAAL TESTEN?   **************************************************
 
-  lokaalTesten =  false; // zet op true om localhost (test) als API bron te gebruiken
+  lokaalTesten =  true; // zet op true om localhost (test) als API bron te gebruiken
 
   // ********************************************************************************
 
   userName = 'Rien';
   userWW = '';
+  lastEditRights = false;
 
   constructor(private http: HttpClient) { }
 
   getLocalData() {
     return this.http.get('/assets/data/songs.json');
+  }
+
+  getLastEditRights(){
+    return this.lastEditRights;
   }
 
   getRemoteData() {

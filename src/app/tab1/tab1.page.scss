@@ -23,8 +23,11 @@ ion-select {
   color:rgb(5, 1, 20);
 }
 
+.lightRed {
+  background-color: rgb(236, 193, 193);
+}
+
 .login{
-  background-color: rgb(203, 214, 213);
   width: 5REM;
   height: 1.8REM;
 }
@@ -42,7 +45,6 @@ ion-select {
   }
 
   .login{
-    background-color: rgb(203, 214, 213);
     width: 7REM;
     height: 2.2REM;
   }
