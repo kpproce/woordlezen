@@ -14,7 +14,7 @@ export class DataService {
   // ********************************************************************************
 
   userName = 'Rien';
-  userWW = 'wachtwoord';
+  userWW = 'ww';
 
   constructor(private http: HttpClient) { }
 
