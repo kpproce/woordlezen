@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login voor de app leesnelheid</ion-title>
+    {{dataService.getLastEditRights()}}
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+
+    <ion-row class= "maxWidth600" color="primary" justify-content-center>
+      <ion-col align-self-center class="mediumClass" size-xs="3.4"size-md="3.4" size-lg="3.4">
+        user:
+      </ion-col>
+      <ion-col align-self-center size-xs="4"size-md="4" size-lg="4">
+        <ion-input name="userName" class="small login" type="text" placeholder="userName" [(ngModel)]='dataService.userName'> </ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row class= "maxWidth600" color="primary" justify-content-center>
+      <ion-col align-self-center class="mediumClass" size-xs="3.4"size-md="3.4" size-lg="3.4">
+        wachtwoord:
+      </ion-col>
+      <ion-col align-self-center size-xs="4"size-md="4" size-lg="4">
+        <ion-input name="userWW" [class]="wwClass" type="text" placeholder="wachtwoord" [(ngModel)]='dataService.userWW'> </ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row class= "maxWidth600" color="primary" justify-content-center>
+      <ion-col align-self-center size-xs="4"size-md="4" size-lg="4">
+        <ion-button (click)="checkLogin()" tooltip="nog invullen">
+          check Login
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class= "maxWidth600" color="primary" justify-content-center>
+      <ion-col align-self-center size-xs="6"size-md="6" size-lg="6">
+        <ion-button [routerLink]="['/tabs/tab1']">
+          ga naar Oefening
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class= "maxWidth600" color="primary" justify-content-center>
+      <ion-col align-self-center size-xs="6"size-md="6" size-lg="6">
+        <ion-button [color]="dataService.getLoginButtonColor() " [routerLink]="['/tabs/tab2']">nieuwe zin invoeren</ion-button>
+      </ion-col>
+  </ion-row>
+  <ion-row class= "maxWidth600" color="primary" justify-content-center>
+    <ion-col align-self-center size-xs="6"size-md="6" size-lg="6">
+      <ion-button [color]="dataService.getLoginButtonColor()" [routerLink]="['/tabs/tab3']">alle zinnen beheer</ion-button>
+    </ion-col>
+</ion-row>
+
+
+  </ion-grid>
+
+</ion-content>

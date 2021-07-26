@@ -2,35 +2,27 @@
   <ion-toolbar>
     <ion-title>
       <ion-row>
-        <ion-col class="small"  align-self-center size-xs="6"size-md="6" size-lg="6">
-          Wijzig tekst, of zichtbaarheid <br> {{info}}
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col align-self-center size-xs="2"size-md="2" size-lg="2">
-          <ion-input name="userName" class="small login" type="text" placeholder="userName" [(ngModel)]='dataService.userName'> </ion-input>
+        <ion-col class="small"  align-self-center size-xs="9"size-md="9" size-lg="9">
+          Wijzig tekst, of zichtbaarheid
         </ion-col>
         <ion-col align-self-center size-xs="3"size-md="3" size-lg="3">
-          <ion-input name="userWW" class="small login" type="text" placeholder="wachtwoord" [(ngModel)]='dataService.userWW'> </ion-input>
+          <ion-button [color]="dataService.getLoginButtonColor()" [routerLink]="['/login'] ">
+            Login
+          </ion-button>
         </ion-col>
+        <br> {{info}}
       </ion-row>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-   <ion-grid>
+   <ion-grid >
     <ion-row color="primary" justify-content-center  *ngFor="let zin of zinnen2; let i = index">
 
       <ion-col align-self-center size-xs="2" size-md="2" size-lg="2"  >
         <ion-button (click)="handleClickDelete(zin.id.toString())" tooltip="nog invullen">
-          {{zin.deleted==='1'?'X Show':'& Del!'}}
+          {{zin.deleted==='1'?'Show':'Del!'}}
               <!-- <ion-icon slot="icon-only" name="trash"></ion-icon> -->
           </ion-button>
        </ion-col>

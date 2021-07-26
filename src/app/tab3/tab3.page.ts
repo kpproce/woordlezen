@@ -26,7 +26,7 @@ export class Tab3Page {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.dataService.getDataZinnen('all','id').subscribe(data => {
+    this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW, 'all','id').subscribe(data => {
       this.zinnen=data;
       this.zinnen2=JSON.parse(JSON.stringify(data));
       this.aantalZinnen = this.zinnen2.length;
@@ -46,7 +46,7 @@ export class Tab3Page {
       this.resultFromDataService=result;
       // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
       this.resultFromDataServiceTXT = JSON.stringify(result);
-      this.dataService.getDataZinnen('all','id').subscribe(data => {
+      this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW, 'all','id').subscribe(data => {
         this.zinnen=data;
         this.zinnen2=JSON.parse(JSON.stringify(data));
         this.aantalZinnen = this.zinnen2.length;

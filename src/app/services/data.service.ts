@@ -9,7 +9,7 @@ export class DataService {
 
   // **********   LOKAAL TESTEN?   **************************************************
 
-  lokaalTesten =  false; // zet op true om localhost (test) als API bron te gebruiken
+  lokaalTesten = false; // zet op true om localhost (test) als API bron te gebruiken
 
   // ********************************************************************************
 
@@ -31,8 +31,8 @@ export class DataService {
     return this.http.get('https://weerlive.nl/api/json-data-10min.php?key=demo&locatie=Amsterdam');
   }
 
-  getDataZinnen(deleted: string, order: string) {
-    const params = '?showDeleted=' + deleted + '&order=' + order;
+  getDataZinnen(userName: string, userWW: string, deleted: string, order: string) {
+    const params = '?userName='+ userName + '&userWW=' + userWW + '&showDeleted=' + deleted + '&order=' + order;
     if (this.lokaalTesten) {
       return this.http.get('http://localhost/php_api_test/apiBasic/read_zinnen.php' + params );
       //http://localhost/php_api_test/apiBasic/read_zinnen.php?showDeleted=all&order=random;
@@ -77,4 +77,30 @@ export class DataService {
       return this.http.get('https://silvermusic.nl/test/apiBasic/write_zin.php'+ params);
     }
   }
+
+  checkLogin(userName: string, userWW: string) { //
+    const params = '?userName='+ userName + '&userWW=' + userWW;
+    if (this.lokaalTesten) {
+      return this.http.get('http://localhost/php_api_test/apiBasic/checkLogin.php'+ params);
+    } else {
+      return this.http.get('https://silvermusic.nl/test/apiBasic/checkLogin.php'+ params);
+    }
+  }
+
+  getLoginButtonColor() {
+   if ( this.lastEditRights) {
+     return 'success';
+   } else {
+    return 'danger';
+   }
+  }
+
+  getEditVisible(){
+    if (this.getLastEditRights()) {
+      return 'visible';
+    } else {
+      return 'hidden';
+    }
+  }
+
 }

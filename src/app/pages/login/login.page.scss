@@ -4,11 +4,6 @@
   // color:rgb(27, 25, 0)
 }
 
-.height2 {
-  height: 8rem;
-
-}
-
 .small{
   font-size: small;
 }
@@ -34,6 +29,19 @@ ion-select {
 .login{
   width: 5REM;
   height: 1.8REM;
+}
+
+.maxWidth600 {
+  max-width: 600px;
+}
+
+.mediumClass{
+  font-size: medium;
+  vertical-align: auto;
+  background-color: rgb(244, 244, 245);
+  height: 2rem;
+  margin-top: 0.5rem;
+  color:rgb(89, 89, 119)
 }
 
 @media screen and (min-width: 640px){

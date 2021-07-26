@@ -18,6 +18,11 @@ export class Tab2Page {
   constructor(private dataService: DataService) {
   }
 
+  checkLogin() {
+    alert ('ingelogd: ' + this.dataService.lastEditRights);
+  }
+
+
   addNewZinToDatabaseApi() {
   //saveNewZin() {
     this.dataService.insertDataZin(this.dataService.userName, this.dataService.userWW, this.zinTekst, this.zinNivo).subscribe(result => {

@@ -5,10 +5,14 @@
       <ion-grid>
         <ion-row color="primary" justify-content-center>
 
-          <ion-col align-self-center size-xs="12"size-md="12" size-lg="12">
+          <ion-col align-self-center class="small" size-xs="9"size-md="9" size-lg="9">
             Test leessnelheid {{this.aantalZinnen}} zinnen.
           </ion-col>
-
+          <ion-col align-self-center size-xs="3"size-md="3" size-lg="3">
+            <ion-button class="mediumClass" [color]="dataService.getLoginButtonColor()" [routerLink]="['/login'] ">
+              Login
+            </ion-button>
+          </ion-col>
 
         </ion-row>
         <ion-row color="primary" justify-content-center>
@@ -24,15 +28,13 @@
 
         <ion-col align-self-center size-xs="2"size-md="2" size-lg="2">
           <ion-button class="x-small" (click)="getZinnen()" tooltip="nog invullen">
-            Load
+            Reload <datalist></datalist>
           </ion-button>
         </ion-col>
-        <ion-col align-self-center size-xs="3"size-md="3" size-lg="3">
-          <ion-input name="userName" class="small login" type="text" placeholder="userName" [(ngModel)]='dataService.userName'> </ion-input>
-        </ion-col>
-        <ion-col align-self-center size-xs="3"size-md="3" size-lg="3">
-          <ion-input name="userWW" class="small login" type="text" placeholder="wachtwoord" [(ngModel)]='dataService.userWW'> </ion-input>
-        </ion-col>
+
+       <!--  <ion-col align-self-center size-xs="3"size-md="3" size-lg="3">
+          <ion-input name="userWW" [class]="wwClass"  type="text" placeholder="ww" [(ngModel)]='dataService.userWW'> </ion-input>
+        </ion-col> -->
       </ion-row>
 
       </ion-grid>
@@ -63,8 +65,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-
 
   <ion-grid>
     <ion-row color="primary" justify-content-center  *ngFor="let geradenItem of geraden; let i = index">

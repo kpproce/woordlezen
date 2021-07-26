@@ -34,6 +34,8 @@ export class Tab1Page {
 
   snelheid = 'normaal'; // slak, langzaam, normaal, snel, jaguar
   zinStyle = 'rgb(10, 10, 10)';
+  wwClass='small login lightRed';
+  buttonIngelogdColor = 'warning';
 
   geraden = [];
 
@@ -42,28 +44,21 @@ export class Tab1Page {
 
   constructor(private dataService: DataService) {}
 
-  getZinnen() {
-    this.dataService.getDataZinnen('nee','random').subscribe(data => {
-      this.zinnen=data;
-      this.zinnen2=JSON.parse(JSON.stringify(data));
-      this.aantalZinnen = this.zinnen2.length;
 
 
-      console.log('remote data zinnen:');
-      console.log(this.zinnen);
-      console.log('Remote data zinnen (stringyfied and parsed):');
-      console.log(this.zinnen2);
-      this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
-      this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
-      // alert( this.actualNivo + ' type: ' + typeof this.actualNivo + '  ' + this.warningTijd2 + ' type: ' + typeof this.warningTijd2 );
-      this. resetTijd();
-      this.startTime();
-      this.geraden = [];
-    });
+  ionViewWillEnter(){
+    this.checkLogin() ;
+    // alert ('ionView-Will-Enter');
   }
 
-  ngOnInit() {
+  ionViewdidEnter(){
+    this.checkLogin() ;
+    alert ('ionView-DID-Enter');
+  }
+
+  ionOnInit() {
    this.getZinnen();
+   this.checkLogin() ;
   }
     onchangeSnelheid(){
       // alert(this.snelheid);
@@ -75,12 +70,49 @@ export class Tab1Page {
       if (this.snelheid==='jaguar') {  this.warningTijd = 0.5; this.warningTijd2 = 1; this.maxTijd = 3; }
     }
 
+    getZinnen() {
+      this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW, 'nee','random').subscribe(data => {
+        this.zinnen=data;
+        this.zinnen2=JSON.parse(JSON.stringify(data));
+        this.aantalZinnen = this.zinnen2.length;
+
+        this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+        this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
+        // alert( this.actualNivo + ' type: ' + typeof this.actualNivo + '  ' + this.warningTijd2 + ' type: ' + typeof this.warningTijd2 );
+        this. resetTijd();
+        this.startTime();
+        this.geraden = [];
+      });
+    }
+
+    checkLogin() {
+      this.dataService.checkLogin(this.dataService.userName, this.dataService.userWW).subscribe(result => {
+        this.resultFromDataService=result;
+        // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
+        this.resultFromDataServiceTXT = this.resultFromDataService.message;
+        this.dataService.lastEditRights  =  (this.resultFromDataService.inlogOK);
+        if ( this.dataService.getLastEditRights()) {
+          this.wwClass='small login lightGreen';
+          this.buttonIngelogdColor='success';
+          // alert('test1:' + this.wwClass);
+        } else {
+          this.wwClass='small login lightRed';
+          this.buttonIngelogdColor='danger';
+          //alert('ingelogd: '+ this.buttonIngelogdColor);
+        }
+           // alert('test2:'+ this.wwClass);
+      });
+
+
+    }
+
     addNewScoreToDatabaseApi() {
       //saveNewZin() {
         this.dataService.insertScore('Rien', 'Wilma61', this.zinnen2[this.zinnenIndex].id, this.verstreken).subscribe(result => {
           this.resultFromDataService=result;
           // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
           this.resultFromDataServiceTXT = ' score opgeslagen';
+
         });
     }
 

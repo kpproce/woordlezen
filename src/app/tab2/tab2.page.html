@@ -2,17 +2,13 @@
   <ion-toolbar>
     <ion-title>
       <ion-row>
-        <ion-col class="small"  align-self-center size-xs="12"size-md="12" size-lg="12">
-          Nieuwe zin invoeren (mits je rechten hebt)
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col align-self-center size-xs="2"size-md="2" size-lg="2">
-          <ion-input name="userName" class="small login" type="text" placeholder="userName" [(ngModel)]='dataService.userName'> </ion-input>
+        <ion-col class="small"  align-self-center size-xs="9"size-md="9" size-lg="9">
+          Nieuwe zin invoeren (mits rechten)
         </ion-col>
         <ion-col align-self-center size-xs="3"size-md="3" size-lg="3">
-          <!-- {{dataService.getLastEditRights()?'ingelogd': 'NIET ingelogd'}} -->
-          <ion-input name="userWW" [class]="wwClass" type="text" placeholder="wachtwoord" [(ngModel)]='dataService.userWW'> </ion-input>
+          <ion-button class="mediumClass" [color]="dataService.getLoginButtonColor()" [routerLink]="['/login'] ">
+            Login
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-title>
@@ -26,15 +22,12 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="padleft">
-
-  </div>
-    <ion-item>
+    <ion-item disabled="false">
       <ion-row>
-        <ion-col align-self-center size-md="3" size-lg="3" size-xs="3"  >
+        <ion-col align-self-center size-xs="4" size-md="3" size-lg="3" >
           nivo (1-5):
         </ion-col>
-        <ion-col align-self-center size-md="3" size-lg="3" size-xs="3"  >
+        <ion-col align-self-center size-xs="2" size-md="2" size-lg="2" >
           <ion-input  name="nivo" type="text" placeholder="nivo van deze zin" [(ngModel)]='zinNivo'> </ion-input>
         </ion-col>
         <ion-col align-self-center size-md="3" size-lg="3" size-xs="3">
