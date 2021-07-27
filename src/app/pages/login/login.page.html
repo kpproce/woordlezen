@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>login voor de app leesnelheid</ion-title>
-    {{dataService.getLastEditRights()}}
+    <ion-title>login app leessnelheid
+     {{dataService.lokaalTesten?'login: '+ dataService.getLastEditRights():''}}
+      <span class="x-small">{{dataService.lokaalTesten?' Lokaal testen staat nog aan':'data van bhosted'}}</span>
+    </ion-title>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content>

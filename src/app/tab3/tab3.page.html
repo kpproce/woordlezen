@@ -17,8 +17,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-   <ion-grid >
-    <ion-row color="primary" justify-content-center  *ngFor="let zin of zinnen2; let i = index">
+   <ion-grid>
+    <ion-row class="gridRowStyle" color="primary" justify-content-center *ngFor="let zin of zinnen2; let i = index">
 
       <ion-col align-self-center size-xs="2" size-md="2" size-lg="2"  >
         <ion-button (click)="handleClickDelete(zin.id.toString())" tooltip="nog invullen">
@@ -33,10 +33,12 @@
       <ion-col align-self-center size-xs="1" size-md="1" size-lg="1"   >
         {{zin.nivo}}
       </ion-col>
-      <ion-col align-self-center size-xs="8" size-md="8" size-lg="8"  >
+
+      <ion-col align-self-center size-xs="12" size-md="12" size-lg="6"  >
         <ion-input  name="nivo" type="text" placeholder="tekst van deze zin"
           [(ngModel)]='zinnen2[i].tekst' (ionBlur)="onBlurInput(zin.id, zinnen2[i].tekst)" (ionChange)="onchangeInput(zin.id)"></ion-input>
        </ion-col>
+
         <!--  <ion-col align-self-center size-md="2" size-lg="2" size-xs="2"  >
               {{zin.deleted === '0' ? 'zichtbaar' : 'NIET zichtbaar'}}
               </ion-col>
@@ -46,7 +48,8 @@
 
   </ion-grid>
   <h4>
-      Deze website is gemaakt door KdeCodeklopper versie 0.93 25-07-21
+      Deze website is gemaakt door KdeCodeklopper versie 0.95 27-07-21
+      login scherm toegevoegd
       Doel is oefenen met woordjes, gemaakt op verzoek van een vriend die door een hersenbloeding deels opnieuw moest leren lezen.
       De website wordt gehoosd bij netlify, die de website host vanuit Github.
       De backend staat via een api bij bhosted. De website is gebouwd in Ionic 5/Angular10 en PHP(7 geloof ik)

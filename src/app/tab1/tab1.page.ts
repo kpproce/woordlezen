@@ -33,6 +33,7 @@ export class Tab1Page {
   info = '';
 
   snelheid = 'normaal'; // slak, langzaam, normaal, snel, jaguar
+  nivo = ['1','2','3','4'];
   zinStyle = 'rgb(10, 10, 10)';
   wwClass='small login lightRed';
   buttonIngelogdColor = 'warning';
@@ -108,12 +109,12 @@ export class Tab1Page {
 
     addNewScoreToDatabaseApi() {
       //saveNewZin() {
-        this.dataService.insertScore('Rien', 'Wilma61', this.zinnen2[this.zinnenIndex].id, this.verstreken).subscribe(result => {
+       /*  this.dataService.insertScore('Rien', 'Wilma61', this.zinnen2[this.zinnenIndex].id, this.verstreken).subscribe(result => {
           this.resultFromDataService=result;
           // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
           this.resultFromDataServiceTXT = ' score opgeslagen';
 
-        });
+        }); */
     }
 
   startTime() {
