@@ -72,7 +72,8 @@ export class Tab1Page {
     }
 
     getZinnen() {
-      this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW, 'nee','random').subscribe(data => {
+      const n = '(' + this.nivo + ')';
+      this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW, 'nee', n, 'random').subscribe(data => {
         this.zinnen=data;
         this.zinnen2=JSON.parse(JSON.stringify(data));
         this.aantalZinnen = this.zinnen2.length;

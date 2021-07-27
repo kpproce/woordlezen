@@ -25,13 +25,13 @@
               <ion-select-option value="jaguar">speed jaguar</ion-select-option>
             </ion-select>
           </ion-col>
-          <ion-col align-self-center  size-xs="5" size-md="4" size-lg="3">
+          <ion-col align-self-center  size-xs="" size-md="4" size-lg="3">
             <ion-row color="primary" justify-content-center>
               <ion-col align-self-center  size-xs="3" size-md="3" size-lg="3">
                 <ion-label class="nivoLabel">nivo</ion-label>
               </ion-col>
-              <ion-col align-self-center  size-xs="9" size-md="9" size-lg="9">
-                <ion-select class="nivoOptions ion-no-padding" multiple="true" [(ngModel)]='nivo' >
+              <ion-col align-self-center  size-xs="8" size-md="8" size-lg="9">
+                <ion-select class="nivoOptions ion-no-padding x-small" multiple="true" [(ngModel)]='nivo' >
                   <ion-select-option value="1">1</ion-select-option>
                   <ion-select-option value="2">2</ion-select-option>
                   <ion-select-option value="3">3</ion-select-option>
@@ -41,7 +41,7 @@
             </ion-row>
           </ion-col>
 
-          <ion-col align-self-center size-xs="2"size-md="2" size-lg="2">
+          <ion-col align-self-center class="padLeft" size-xs="2" size-md="2" size-lg="2">
             <ion-button class="x-small" (click)="getZinnen()" tooltip="nog invullen">
               Reload <datalist></datalist>
             </ion-button>

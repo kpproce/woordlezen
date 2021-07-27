@@ -8,7 +8,7 @@ import { DataService } from '../../services/data.service';
 })
 export class LoginPage implements OnInit {
 
-  wwClass='small login lightRed';
+  wwClass='login';
   buttonIngelogdColor='danger';
   resultFromDataService: any;
   resultFromDataServiceTXT = '-- geen info';
@@ -39,11 +39,11 @@ export class LoginPage implements OnInit {
       this.resultFromDataServiceTXT = this.resultFromDataService.message;
       this.dataService.lastEditRights  =  (this.resultFromDataService.inlogOK);
       if ( this.dataService.getLastEditRights()) {
-        this.wwClass='small login lightGreen';
+        this.wwClass='medium login lightGreen';
         this.buttonIngelogdColor='success';
         // alert('Je hebt wel een goede inlog: ' + this.buttonIngelogdColor);
       } else {
-        this.wwClass='small login lightRed';
+        this.wwClass='medium login lightRed';
         this.buttonIngelogdColor='danger';
         // alert('Je hebt GEEN goede inlog: '+ this.buttonIngelogdColor);
       }
