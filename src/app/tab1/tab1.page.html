@@ -63,8 +63,6 @@
     <ion-row color="primary" justify-content-center>
       <h2 [style.color]="zinStyle" class="padleft"> {{actualNivo}}: {{actualZin}} </h2>
     </ion-row>
-    {{actualZinCorrect}} --
-    {{geradenTekst}}
     <ion-row color="primary" justify-content-center>
       <ion-col align-self-center size-md="2" size-lg="2" size-xs="3"  >
         <ion-button (click)="nextZin(true)" tooltip="nog invullen">
@@ -90,12 +88,21 @@
 
   <ion-grid>
     <ion-row color="primary" justify-content-center  *ngFor="let geradenItem of geraden; let i = index">
-      <ion-col align-self-center size-md="7" size-lg="5" size-xs="6"  >
-       {{geradenItem.zin}}
+      <ion-col align-self-center size-xs="6" size-md="6" size-lg="6">
+        <ion-row>
+          {{geradenItem.zin}}
+        </ion-row>
+        <ion-row>
+         {{geradenItem.correct}}
+        </ion-row>
        </ion-col>
-      <ion-col align-self-center size-md="5" size-lg="5" size-xs="5"  >
+      <ion-col align-self-center size-xs="2" size-md="2" size-lg="2" >
          {{geradenItem.tijd}}
        </ion-col>
+       <ion-col align-self-center size-xs="4"  size-md="4" size-lg="4" >
+        {{geradenItem.geradenTekst}}
+        </ion-col>
+
     </ion-row>
   </ion-grid>
 

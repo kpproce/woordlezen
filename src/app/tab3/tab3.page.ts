@@ -30,19 +30,21 @@ export class Tab3Page {
       this.zinnen=data;
       this.zinnen2=JSON.parse(JSON.stringify(data));
       this.aantalZinnen = this.zinnen2.length;
-
-      console.log('remote data zinnen:');
-      console.log(this.zinnen);
-      console.log('Remote data zinnen (stringyfied and parsed):');
-      console.log(this.zinnen2);
       this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
     });
   }
 
   ionViewWillEnter(){
     this.teller=0;
+    this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW, 'all', '(1,2,3,4)', 'id').subscribe(data => {
+      this.zinnen=data;
+      this.zinnen2=JSON.parse(JSON.stringify(data));
+      this.aantalZinnen = this.zinnen2.length;
+      this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+    });
     // alert ('ionView-Will-Enter');
   }
+
   handleClickDelete(id: string){
     // de api wijzigt de deleted (zichtbaarheid)
     //saveNewZin() {
@@ -84,7 +86,7 @@ export class Tab3Page {
       } else {
         this.info = this.info +  ' NIET opgeslagen ';
       }
-      alert('Ingelogd: '+ result2.ingelogd + ' -- ' + result2.message);
+      //alert('Ingelogd: '+ result2.ingelogd + ' -- ' + result2.message);
     });
   }
 

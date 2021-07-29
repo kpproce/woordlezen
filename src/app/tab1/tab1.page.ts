@@ -19,9 +19,10 @@ export class Tab1Page {
 
   zinnenIndex = 0;
   actualZin = 'geen data gevonden check data connectie';
-  actualZinCorrect = '';
+  actualZinCorrect= 'onbekend';
+  zinGeraden = false;
+  zinGeradenTekst = 'nog niets geraden';
 
-  geradenTekst = 'nog niets geraden';
   actualNivo =-1;
 
   nu = new Date();
@@ -47,7 +48,6 @@ export class Tab1Page {
   resultFromDataServiceTXT = '-- geen info';
 
   constructor(private dataService: DataService) {}
-
 
   ionViewWillEnter(){
     this.checkLogin();
@@ -135,8 +135,32 @@ export class Tab1Page {
     }
   }
 
+  beoordeelZin(goed: boolean) {
+    if ( this.actualZin===this.actualZinCorrect) {
+      if (goed) {
+        this.zinGeradenTekst = 'CORRECT de zin was goed';
+        this.zinGeraden = true;
+      }
+      else {
+        this.zinGeradenTekst = 'HELAAS zin was WEL goed';
+        this.zinGeraden = false;
+      }
+
+    } else { // de zinnen waren ongelijk en dus is een foute aangeboden
+      if (goed) { // jij dacht goed, maar het was fout
+        this.zinGeradenTekst = 'HELAAS de zin was TOCH FOUT';
+        this.zinGeraden = false;
+      }
+      else { // zin ongelijk en dat dacgt jij ook
+        this.zinGeradenTekst = 'CORRECT de zin was FOUT';
+        this.zinGeraden = true;
+      }
+    }
+  }
+
   verwerkTijd(){
-    this.geraden.unshift({zin: this.actualZin, tijd: this.verstreken});
+    this.geraden.unshift({zin: this.actualZin, correct: this.actualZinCorrect,
+      tijd: this.verstreken, geraden: this.zinGeraden, geradenTekst: this.zinGeradenTekst});
     // alert(this.actualZin + ' ' + this.verstreken + ' ' + this.geraden[0].tekst);
     console.log(this.geraden);
   }
@@ -153,7 +177,7 @@ export class Tab1Page {
     this.startMoment = new Date();
     this.tijdVerstreken= (Math.floor((Date.now().valueOf() - this.startDate.valueOf())/100)/10);
     this.startDate = new Date();
-    this.addNewScoreToDatabaseApi();
+    // this.addNewScoreToDatabaseApi(); // niet handig, beter uitdenken
   }
 
   mapData(){
@@ -166,6 +190,7 @@ export class Tab1Page {
   }
 
   nextZin(goed: boolean){
+    this.beoordeelZin(goed);
     if (this.aantalZinnen>0) {
       this.zinnenIndex ++;
       if (this.zinnenIndex > this.zinnen2.length) {
@@ -176,11 +201,6 @@ export class Tab1Page {
       this.zinStyle = 'rgb(10, 10, 10)';
       this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
       this.actualZinCorrect = this.zinnen2[this.zinnenIndex].tekstCorrect;
-      if ( this.actualZin===this.actualZinCorrect) {
-        this.geradenTekst = 'teksten zijn gelijk, jij dacht: ' + (goed?' dat ook':' van niet');
-      } else {
-        this.geradenTekst = 'teksten zijn NIET gelijk jij dacht ' + (goed?' van niet':' dat ook');
-      }
       this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
       this.duurFactor = 1 + (this.actualNivo -2 )/5;
     }
