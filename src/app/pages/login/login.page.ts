@@ -8,8 +8,8 @@ import { DataService } from '../../services/data.service';
 })
 export class LoginPage implements OnInit {
 
-  wwClass='login';
-  buttonIngelogdColor='danger';
+  wwClass='medium login lightRed';
+  buttonIngelogdColor='Warning';
   resultFromDataService: any;
   resultFromDataServiceTXT = '-- geen info';
   constructor(public dataService: DataService) { }
@@ -27,7 +27,6 @@ export class LoginPage implements OnInit {
     return this.buttonIngelogdColor;
   }
 
-
   gotoTab1(){
     // this.navctrl.navigateRoot(["tabs/home"]);
   }
@@ -44,15 +43,13 @@ export class LoginPage implements OnInit {
         // alert('Je hebt wel een goede inlog: ' + this.buttonIngelogdColor);
       } else {
         this.wwClass='medium login lightRed';
-        this.buttonIngelogdColor='danger';
+        this.buttonIngelogdColor='Warning';
         // alert('Je hebt GEEN goede inlog: '+ this.buttonIngelogdColor);
       }
       // alert ('ingelogd: ' + this.dataService.lastEditRights);
     });
 
   }
-
-
 
   test() {
     alert('test');
