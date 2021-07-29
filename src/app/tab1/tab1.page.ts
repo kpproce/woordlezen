@@ -52,11 +52,6 @@ export class Tab1Page {
     // alert ('ionView-Will-Enter');
   }
 
-  ionViewdidEnter(){
-    this.checkLogin() ;
-    alert ('ionView-DID-Enter');
-  }
-
   ionOnInit() {
    this.getZinnen();
    this.checkLogin() ;

@@ -9,7 +9,8 @@ import { DataService } from '../../services/data.service';
 export class LoginPage implements OnInit {
 
   wwClass='medium login lightRed';
-  buttonIngelogdColor='Warning';
+  buttonsBKColor='success';
+  buttonsTextColor='black';
   resultFromDataService: any;
   resultFromDataServiceTXT = '-- geen info';
   constructor(public dataService: DataService) { }
@@ -23,9 +24,23 @@ export class LoginPage implements OnInit {
     this.checkLogin();
   }
 
-  getButtonIngelogdColor() {
-    return this.buttonIngelogdColor;
+  getButtonsStyle() {
+    if ( this.dataService.lastEditRights) {
+      return 'success';
+    } else {
+     return 'danger';
+    }
+    return this.buttonsTextColor;
   }
+
+  getButtonsTextColor() {
+    if ( this.dataService.lastEditRights) {
+      return 'color: black';
+    } else {
+     return 'color: white';
+    }
+  }
+
 
   gotoTab1(){
     // this.navctrl.navigateRoot(["tabs/home"]);
@@ -39,11 +54,14 @@ export class LoginPage implements OnInit {
       this.dataService.lastEditRights  =  (this.resultFromDataService.inlogOK);
       if ( this.dataService.getLastEditRights()) {
         this.wwClass='medium login lightGreen';
-        this.buttonIngelogdColor='success';
+        this.buttonsBKColor='success';
+        this.buttonsTextColor='black';
+
         // alert('Je hebt wel een goede inlog: ' + this.buttonIngelogdColor);
       } else {
         this.wwClass='medium login lightRed';
-        this.buttonIngelogdColor='Warning';
+        this.buttonsBKColor='warning';
+        this.buttonsTextColor='black';
         // alert('Je hebt GEEN goede inlog: '+ this.buttonIngelogdColor);
       }
       // alert ('ingelogd: ' + this.dataService.lastEditRights);
