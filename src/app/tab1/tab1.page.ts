@@ -18,7 +18,10 @@ export class Tab1Page {
   tijdVerstreken: number ;
 
   zinnenIndex = 0;
-  actualZin = 'geen data gevonden checkdata connectie';
+  actualZin = 'geen data gevonden check data connectie';
+  actualZinCorrect = '';
+
+  geradenTekst = 'nog niets geraden';
   actualNivo =-1;
 
   nu = new Date();
@@ -46,15 +49,14 @@ export class Tab1Page {
   constructor(private dataService: DataService) {}
 
 
-
   ionViewWillEnter(){
-    this.checkLogin() ;
+    this.checkLogin();
     // alert ('ionView-Will-Enter');
   }
 
-  ionOnInit() {
-   this.getZinnen();
+  ngOnInit() {
    this.checkLogin() ;
+   this.getZinnen();
   }
     onchangeSnelheid(){
       // alert(this.snelheid);
@@ -68,15 +70,17 @@ export class Tab1Page {
 
     getZinnen() {
       const n = '(' + this.nivo + ')';
+      // alert('test');
       this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW, 'nee', n, 'random').subscribe(data => {
         this.zinnen=data;
         this.zinnen2=JSON.parse(JSON.stringify(data));
         this.aantalZinnen = this.zinnen2.length;
 
         this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+        this.actualZinCorrect = this.zinnen2[this.zinnenIndex].tekstCorrect;
         this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
-        // alert( this.actualNivo + ' type: ' + typeof this.actualNivo + '  ' + this.warningTijd2 + ' type: ' + typeof this.warningTijd2 );
-        this. resetTijd();
+        //alert( this.actualNivo + ' type: ' + typeof this.actualNivo + '  ' + this.warningTijd2 + ' type: ' + typeof this.warningTijd2 );
+        this.resetTijd();
         this.startTime();
         this.geraden = [];
       });
@@ -99,8 +103,6 @@ export class Tab1Page {
         }
            // alert('test2:'+ this.wwClass);
       });
-
-
     }
 
     addNewScoreToDatabaseApi() {
@@ -163,7 +165,7 @@ export class Tab1Page {
     this.songs2 = this.songs2.map((myItem) => myItem);
   }
 
-  nextZin(){
+  nextZin(goed: boolean){
     if (this.aantalZinnen>0) {
       this.zinnenIndex ++;
       if (this.zinnenIndex > this.zinnen2.length) {
@@ -173,6 +175,12 @@ export class Tab1Page {
       this.verwerkTijd();
       this.zinStyle = 'rgb(10, 10, 10)';
       this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+      this.actualZinCorrect = this.zinnen2[this.zinnenIndex].tekstCorrect;
+      if ( this.actualZin===this.actualZinCorrect) {
+        this.geradenTekst = 'teksten zijn gelijk, jij dacht: ' + goed?' dat ook':' van niet';
+      } else {
+        this.geradenTekst = 'teksten zijn NIET gelijk' + goed?' van niet':' dat ook';
+      }
       this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
       this.duurFactor = 1 + (this.actualNivo -2 )/5;
     }

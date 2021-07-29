@@ -9,7 +9,7 @@ export class DataService {
 
   // **********   LOKAAL TESTEN?   **************************************************
 
-  lokaalTesten = false; // zet op true om localhost (test) als API bron te gebruiken
+  lokaalTesten = true; // zet op true om localhost (test) als API bron te gebruiken
 
   // ********************************************************************************
 
