@@ -177,9 +177,9 @@ export class Tab1Page {
       this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
       this.actualZinCorrect = this.zinnen2[this.zinnenIndex].tekstCorrect;
       if ( this.actualZin===this.actualZinCorrect) {
-        this.geradenTekst = 'teksten zijn gelijk, jij dacht: ' + goed?' dat ook':' van niet';
+        this.geradenTekst = 'teksten zijn gelijk, jij dacht: ' + (goed?' dat ook':' van niet');
       } else {
-        this.geradenTekst = 'teksten zijn NIET gelijk' + goed?' van niet':' dat ook';
+        this.geradenTekst = 'teksten zijn NIET gelijk jij dacht ' + (goed?' van niet':' dat ook');
       }
       this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
       this.duurFactor = 1 + (this.actualNivo -2 )/5;

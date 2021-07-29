@@ -63,14 +63,16 @@
     <ion-row color="primary" justify-content-center>
       <h2 [style.color]="zinStyle" class="padleft"> {{actualNivo}}: {{actualZin}} </h2>
     </ion-row>
+    {{actualZinCorrect}} --
+    {{geradenTekst}}
     <ion-row color="primary" justify-content-center>
       <ion-col align-self-center size-md="2" size-lg="2" size-xs="3"  >
-        <ion-button (click)="nextZin()" tooltip="nog invullen">
+        <ion-button (click)="nextZin(true)" tooltip="nog invullen">
           Goed
         </ion-button>
       </ion-col>
       <ion-col align-self-center size-md="2" size-lg="2" size-xs="3"  >
-        <ion-button (click)="nextZin()" tooltip="nog invullen">
+        <ion-button (click)="nextZin(false)" tooltip="nog invullen">
           Fout
         </ion-button>
       </ion-col>
