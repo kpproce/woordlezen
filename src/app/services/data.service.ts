@@ -71,7 +71,8 @@ export class DataService {
   }
 
   updateDataTekst(userName: string, userWW: string, id: string, tekst: string, tekstCorrect: string) { //
-    const params = '?userName='+ userName + '&userWW=' + userWW + '&id=' + id + '&tekst=' + tekst + '&tekstCorrect=' + tekstCorrect + '&do=update';
+    const params = '?userName='+ userName + '&userWW=' + userWW + '&id=' + id + '&tekst='
+     + tekst + '&tekstCorrect=' + tekstCorrect + '&do=update';
     if (this.lokaalTesten) {
       return this.http.get('http://localhost/php_api_test/apiBasic/write_zin.php'+ params);
     } else {

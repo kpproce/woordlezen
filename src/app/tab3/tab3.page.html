@@ -2,15 +2,25 @@
   <ion-toolbar>
     <ion-title>
       <ion-row>
-        <ion-col class="small"  align-self-center size-xs="9"size-md="9" size-lg="9">
+        <ion-col class="small"  align-self-center size-xs="10"size-md="10" size-lg="10">
           Wijzig tekst, of zichtbaarheid
         </ion-col>
-        <ion-col align-self-center size-xs="3"size-md="3" size-lg="3">
+        <ion-col float-right >
           <ion-button [color]="dataService.getLoginButtonColor()" [routerLink]="['/login'] ">
             Login
           </ion-button>
         </ion-col>
-        <br> {{info}}
+
+      </ion-row>
+      <ion-row>
+        <ion-col class="small"  align-self-center size-xs="7"size-md="7" size-lg="7">
+           {{info}}
+        </ion-col>
+        <ion-col class="small"  align-self-center size-xs="4"size-md="4" size-lg="4">
+          <ion-input name="filter" type="text" placeholder="filter"
+            [(ngModel)]='filterString' (ionChange)="onchangeZoekTekst">
+          </ion-input>
+        </ion-col>
       </ion-row>
     </ion-title>
   </ion-toolbar>
@@ -18,9 +28,16 @@
 
 <ion-content [fullscreen]="true">
    <ion-grid>
-    <ion-row class="gridRowStyle" color="primary" justify-content-center *ngFor="let zin of zinnen2; let i = index">
+    <ion-row class="gridRowStyle" color="primary" justify-content-center *ngFor="let zin of zinnen2; let i = index"
+    [ngStyle]="{
+      'display': this.filterString===''?'block':
+        zin.nivo===this.filterString?'block':
+        zin.id===this.filterString?'block':
+        zin.tekst.toLowerCase().includes(filterString.toLowerCase())?'block':
+        zin.tekstCorrect.toLowerCase().includes(filterString.toLowerCase())?'block':
+        'none'
+    }" >
       <ion-col align-self-center size-xs="12" size-md="12" size-lg="12"  >
-
         <ion-row>
           <ion-col align-self-center size-xs="2" size-md="2" size-lg="2"  >
             <ion-button (click)="handleClickDelete(zin.id.toString())" tooltip="nog invullen">
@@ -30,13 +47,12 @@
           </ion-col>
 
           <ion-col align-self-center size-xs="2" size-md="2" size-lg="2"  >
-          id={{zin.id}}
+            id={{zin.id}}
           </ion-col>
           <ion-col align-self-center size-xs="2" size-md="2" size-lg="2"   >
             nivo={{zin.nivo}}
           </ion-col>
         </ion-row>
-
       <ion-row>
         <ion-col align-self-center size-xs="2" size-md="2" size-lg="2" >
           tekst

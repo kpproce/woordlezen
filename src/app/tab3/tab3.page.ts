@@ -16,6 +16,8 @@ export class Tab3Page {
   zinnenIndex = 0;
   zinTekst ='leeg';
 
+  filterString = '';
+
   resultFromDataService: any;
   resultFromDataServiceTXT = 'geen update info';
   dataOpgeslagen = false;
@@ -107,5 +109,9 @@ export class Tab3Page {
 
     this.idVanAangepasteZin = 0;
     this.teller = 0;
+  }
+
+  onchangeZoekTekst(){
+
   }
 }

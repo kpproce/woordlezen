@@ -11,24 +11,34 @@ export class Tab1Page {
   songs2 ;
   weather ;
   zinnen;
+
+
   zinnen2;
   aantalZinnen = 0;
-  startDate = new Date();
+  startDateZin = new Date();
+  startDateMeerdereZinnen = new Date();
 
   tijdVerstreken: number ;
 
   zinnenIndex = 0;
   actualZin = 'geen data gevonden check data connectie';
+  zinId = 0;
   actualZinCorrect= 'onbekend';
+  zinGelijk = false;
   zinGeraden = false;
+  zinBkColor = 'white';
   zinGeradenTekst = 'nog niets geraden';
 
   actualNivo =-1;
 
   nu = new Date();
-  verstreken = 0;
-  intervalVar;
-  startMoment = new Date();
+  verstrekenZin = 0;
+  verstrekenMeerdereZinnen = 0;
+  timeIntervalZin; // 1 zin
+  timerIntervalMeerdereZinnen; // meerdere zinnen bijv duur van een test
+  startMomentZin = new Date();
+  startMomentMeerdereZinnen = new Date();
+
   maxTijd = 20;
   warningTijd = 5;
   warningTijd2 = 8;
@@ -51,6 +61,7 @@ export class Tab1Page {
 
   ionViewWillEnter(){
     this.checkLogin();
+    this.onchangeSnelheid();
     // alert ('ionView-Will-Enter');
   }
 
@@ -61,14 +72,14 @@ export class Tab1Page {
     onchangeSnelheid(){
       // alert(this.snelheid);
       // nivo 1 = *  0,8      // nivo 2 = *  1      // nivo 3 = *  1,2      // nivo 4 = *  1,4
-      if (this.snelheid==='slak') { this.warningTijd = 10; this.warningTijd2 = 14; this.maxTijd = 20; }
-      if (this.snelheid==='langzaam') { this.warningTijd = 7; this.warningTijd2 = 11;  this.maxTijd = 15;}
-      if (this.snelheid==='normaal') {  this.warningTijd = 5; this.warningTijd2 = 8; this.maxTijd = 12; }
-      if (this.snelheid==='snel') {  this.warningTijd = 3; this.warningTijd2 = 5; this.maxTijd = 10; }
-      if (this.snelheid==='jaguar') {  this.warningTijd = 0.5; this.warningTijd2 = 1; this.maxTijd = 3; }
+      if (this.snelheid==='slak')     { this.warningTijd = 15;    this.warningTijd2 = 17; this.maxTijd = 20; }
+      if (this.snelheid==='langzaam') { this.warningTijd = 10;    this.warningTijd2 = 14; this.maxTijd = 17;}
+      if (this.snelheid==='normaal')  {  this.warningTijd = 5;    this.warningTijd2 = 8;  this.maxTijd = 10; }
+      if (this.snelheid==='snel')     { this.warningTijd = 3;     this.warningTijd2 = 5;  this.maxTijd = 8; }
+      if (this.snelheid==='jaguar')   {  this.warningTijd = 0.5;  this.warningTijd2 = 1;  this.maxTijd = 2; }
     }
 
-    getZinnen() {
+    getZinnen() { // ******************** RELOAD ***************
       const n = '(' + this.nivo + ')';
       // alert('test');
       this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW, 'nee', n, 'random').subscribe(data => {
@@ -77,11 +88,15 @@ export class Tab1Page {
         this.aantalZinnen = this.zinnen2.length;
 
         this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+        this.zinId = this.zinnen2[this.zinnenIndex].id;
+
         this.actualZinCorrect = this.zinnen2[this.zinnenIndex].tekstCorrect;
         this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
         //alert( this.actualNivo + ' type: ' + typeof this.actualNivo + '  ' + this.warningTijd2 + ' type: ' + typeof this.warningTijd2 );
-        this.resetTijd();
-        this.startTime();
+        this.resetTijdZin();
+        this.resetTijdMeerdereZinnen();
+        this.startTijdMetingZin();
+        this.startTijdMetingMeerdereZinnen();
         this.geraden = [];
       });
     }
@@ -105,7 +120,7 @@ export class Tab1Page {
       });
     }
 
-    addNewScoreToDatabaseApi() {
+    addNewScoreToDatabaseApi() { // niet in gebruik
       //saveNewZin() {
        /*  this.dataService.insertScore('Rien', 'Wilma61', this.zinnen2[this.zinnenIndex].id, this.verstreken).subscribe(result => {
           this.resultFromDataService=result;
@@ -115,19 +130,19 @@ export class Tab1Page {
         }); */
     }
 
-  startTime() {
+  startTijdMetingZin() {
     if (this.aantalZinnen>0) {
-      this.intervalVar = setInterval(function() {
-        this.verstreken = (Math.floor(( new Date().valueOf() - this.startMoment.valueOf())/100)/10);
+      this.timeIntervalZin = setInterval(function() {
+        this.verstrekenZin = (Math.floor(( new Date().valueOf() - this. startMomentZin.valueOf())/100)/10);
         this.duurFactor = 1 + (this.actualNivo -2 )/5;
-        if (this.verstreken > (this.warningTijd * this. duurFactor)){
+        if (this.verstrekenZin > (this.warningTijd * this. duurFactor)){
           this.zinStyle = 'rgb(236, 230, 228)';
         };
-        if (this.verstreken  > (this.warningTijd2 * this. duurFactor) ){
-          this.zinStyle = 'rgb(255, 250, 250)';
+        if (this.verstrekenZin  > (this.warningTijd2 * this. duurFactor) ){
+          this.zinStyle = 'rgb(250, 170, 170)';
         };
-        if (this.verstreken > this.maxTijd){
-          this.verstreken = 0;
+        if (this.verstrekenZin >= this.maxTijd){
+          this.verstrekenZin = this.maxTijd;
           this.zinStyle = 'rgb(250, 1, 1)';
           // backgroud 245, 244, 237
         }
@@ -135,48 +150,76 @@ export class Tab1Page {
     }
   }
 
+  startTijdMetingMeerdereZinnen() { // meerdere zinnen bijv een test
+    this.timerIntervalMeerdereZinnen = setInterval(function() {
+      this.verstrekenMeerdereZinnen = (Math.floor(( new Date().valueOf() - this.startMomentMeerdereZinnen.valueOf())/1000));
+
+    }.bind(this),400);
+
+  }
+
   beoordeelZin(goed: boolean) {
     if ( this.actualZin===this.actualZinCorrect) {
+      this.zinGelijk = true;
+
       if (goed) {
         this.zinGeradenTekst = 'CORRECT de zin was goed';
         this.zinGeraden = true;
+        this.zinBkColor = '#ecffe0'; //goed
       }
       else {
-        this.zinGeradenTekst = 'HELAAS zin was WEL goed';
+        this.zinGeradenTekst = 'ZIN was wel GOED';
         this.zinGeraden = false;
+        this.zinBkColor = '#fcf3f0'; //fout
       }
 
     } else { // de zinnen waren ongelijk en dus is een foute aangeboden
+      this.zinGelijk = false;
+
       if (goed) { // jij dacht goed, maar het was fout
-        this.zinGeradenTekst = 'HELAAS de zin was TOCH FOUT';
+        this.zinGeradenTekst = 'ZIN was toch FOUT';
         this.zinGeraden = false;
+        this.zinBkColor = '#fcf3f0'; //fout
       }
       else { // zin ongelijk en dat dacgt jij ook
         this.zinGeradenTekst = 'CORRECT de zin was FOUT';
         this.zinGeraden = true;
+        this.zinBkColor = '#ecffe0'; //goed
       }
     }
   }
 
-  verwerkTijd(){
+  verwerkTijd(){  // ******************** TOEVOEGEN AAN geraden LIJST ********************
     this.geraden.unshift({zin: this.actualZin, correct: this.actualZinCorrect,
-      tijd: this.verstreken, geraden: this.zinGeraden, geradenTekst: this.zinGeradenTekst});
+      tijd: this.verstrekenZin, geraden: this.zinGeraden, gelijk: this.zinGelijk,
+      geradenTekst: this.zinGeradenTekst, zinBkColor: this.zinBkColor, id: this.zinId});
     // alert(this.actualZin + ' ' + this.verstreken + ' ' + this.geraden[0].tekst);
     console.log(this.geraden);
   }
 
-  resetTijd(){
-    this.startMoment = new Date();
-    this.tijdVerstreken= (Math.floor((Date.now().valueOf() - this.startDate.valueOf())/100)/10);
-    this.startDate = new Date();
+  resetTijdZin(){
+    this.startMomentZin= new Date();
+    // this.tijdVerstreken= (Math.floor((Date.now().valueOf() - this.startDate.valueOf())/100)/10);
+    this.startDateZin = new Date();
     this.zinStyle =  'rgb(10, 10, 10)';
+    // alert('resetTijd voor 1 zin aangeroepen');
   }
 
-  hoelang(){
+  resetTijdMeerdereZinnen(){
+    this.startMomentMeerdereZinnen= new Date();
+    // this.tijdVerstreken= (Math.floor((Date.now().valueOf() - this.startDate.valueOf())/100)/10);
+    this.startDateMeerdereZinnen = new Date();
+    this.resetTijdZin();
+    this.zinStyle =  'rgb(10, 10, 10)';
+
+    // alert('resetTijd meerdere zinnen aangeroepen');
+  }
+
+  hoelangZin(){
     // doel van deze functie is om de tijd in sec te berekenen vanaf start van de app.
-    this.startMoment = new Date();
-    this.tijdVerstreken= (Math.floor((Date.now().valueOf() - this.startDate.valueOf())/100)/10);
-    this.startDate = new Date();
+    this.startMomentZin = new Date();
+    // this.tijdVerstreken= (Math.floor((Date.now().valueOf() - this.startDate.valueOf())/100)/10);
+    this.startDateZin = new Date();
     // this.addNewScoreToDatabaseApi(); // niet handig, beter uitdenken
   }
 
@@ -196,7 +239,7 @@ export class Tab1Page {
       if (this.zinnenIndex > this.zinnen2.length) {
         this.zinnenIndex = 0;
       }
-      this.hoelang();
+      this.hoelangZin();
       this.verwerkTijd();
       this.zinStyle = 'rgb(10, 10, 10)';
       this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
@@ -207,6 +250,22 @@ export class Tab1Page {
     else {
       this.actualZin = 'geen data gevonden checkdata connectie';
     }
+
   }
+
+  getZinTekstColor() {
+    if (this.zinGelijk )
+      {return 'color:black; background-color: lightgreen;';}
+    else
+      {return 'color:white; background-color: red;';}
+  }
+
+  getGeradenZinBkColor() {
+    if (this.zinGelijk )
+      {return 'orange';}
+    else
+      {return 'yellow';}
+  }
+
 
 }
