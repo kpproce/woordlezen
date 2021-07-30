@@ -10,6 +10,7 @@ import { DataService } from '../services/data.service';
 
 export class Tab2Page {
   zinTekst = '';
+  zinTekstCorrect = '';
   zinNivo = 2;
   resultFromDataService: any;
   resultFromDataServiceTXT = '-- geen info';
@@ -22,10 +23,14 @@ export class Tab2Page {
     alert ('ingelogd: ' + this.dataService.lastEditRights);
   }
 
+  onChangeText() {
+    this.zinTekstCorrect = this.zinTekst;
+  }
 
   addNewZinToDatabaseApi() {
   //saveNewZin() {
-    this.dataService.insertDataZin(this.dataService.userName, this.dataService.userWW, this.zinTekst, this.zinNivo).subscribe(result => {
+    this.dataService.insertDataZin(this.dataService.userName, this.dataService.userWW, this.zinTekst,
+                                   this.zinTekstCorrect, this.zinNivo).subscribe(result => {
       this.resultFromDataService=result;
       // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
       this.resultFromDataServiceTXT = this.resultFromDataService.message;

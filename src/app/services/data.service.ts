@@ -42,8 +42,9 @@ export class DataService {
     }
   }
 
-  insertDataZin(userName: string, userWW: string, tekst: string, nivo: number) {
-    const params = '?userName='+ userName + '&userWW=' + userWW + '&do=insert&tekst=' + tekst + '&nivo=' + nivo;
+  insertDataZin(userName: string, userWW: string, tekst: string, tekstCorrect: string, nivo: number) {
+    const params = '?userName='+ userName + '&userWW=' + userWW + '&do=insert&tekst=' + tekst
+                    + '&tekstCorrect=' + tekstCorrect + '&nivo=' + nivo;
     if (this.lokaalTesten) {
       return this.http.get('http://localhost/php_api_test/apiBasic/write_zin.php' + params );
     } else {
