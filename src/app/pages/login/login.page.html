@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>login app leessnelheid
+    <ion-title>www.weerlesen.nl
      {{dataService.lokaalTesten?'login: '+ dataService.getLastEditRights():''}}
       <span class="x-small">{{dataService.lokaalTesten?' Lokaal testen staat aan':'data van bhosted'}}</span>
     </ion-title>
@@ -8,20 +8,17 @@
 
 </ion-header>
 
-<ion-content>
-  <ion-grid>
-
+<ion-content >
+  <ion-grid >
+    <br>
+    <ion-row class= "border1 background2" color="primary" justify-content-center>
+      Initiatief van Kim Procé en Rien Parham. Dit is een oefentool om woorden en zinnen te oefenen. In eerste instantie gemaakt voor Rien. Maar in principe door iedereen te gebruiken.
+    </ion-row>
+    <br>
     <ion-row class= "maxWidth600" color="primary" justify-content-center>
-      <ion-col align-self-center class="mediumClass" size-xs="3.4"size-md="3.4" size-lg="3.4">
-        user:
-      </ion-col>
+
       <ion-col align-self-center size-xs="4"size-md="4" size-lg="4">
         <ion-input name="userName" class="small login" type="text" placeholder="userName" [(ngModel)]='dataService.userName'> </ion-input>
-      </ion-col>
-    </ion-row>
-    <ion-row class= "maxWidth600" color="primary" justify-content-center>
-      <ion-col align-self-center class="mediumClass" size-xs="3.4"size-md="3.4" size-lg="3.4">
-        wachtwoord:
       </ion-col>
       <ion-col align-self-center size-xs="4" size-md="4" size-lg="4">
         <ion-input name="userWW" [class]="wwClass" type="text" placeholder="wachtwoord" [(ngModel)]='dataService.userWW'> </ion-input>
@@ -35,19 +32,19 @@
 
     <ion-row class= "maxWidth600"  justify-content-center>
       <ion-col align-self-center size-xs="6"size-md="6" size-lg="6">
-        <ion-button color="success" [routerLink]="['/tabs/tab1']">
-          ga naar Oefening
+        <ion-button color="success" size="large" [routerLink]="['/tabs/tab1']">
+        ga naar Oefening
         </ion-button>
       </ion-col>
     </ion-row>
     <ion-row class= "maxWidth600" color="primary" justify-content-center>
       <ion-col align-self-center size-xs="6"size-md="6" size-lg="6">
-        <ion-button [color]="this.getButtonsStyle()" [style]='getButtonsTextColor()' [routerLink]="['/tabs/tab2']">nieuwe zin invoeren</ion-button>
+        <ion-button [color]="this.getButtonsStyle()" [style]='getButtonsTextColor()' [routerLink]="['/tabs/tab2']">nieuwe zin invoeren (alleen LOGIN)</ion-button>
       </ion-col>
   </ion-row>
   <ion-row class= "maxWidth600" color="primary" justify-content-center>
     <ion-col align-self-center size-xs="6"size-md="6" size-lg="6">
-      <ion-button [color]="this.getButtonsStyle()" [routerLink]="['/tabs/tab3']">alle zinnen beheer</ion-button>
+      <ion-button [color]="this.getButtonsStyle()" [routerLink]="['/tabs/tab3']">alle zinnen beheer (alleen LOGIN)</ion-button>
     </ion-col>
 </ion-row>
 

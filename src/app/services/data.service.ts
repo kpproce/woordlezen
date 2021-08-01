@@ -19,15 +19,11 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  getLocalData() {
-    return this.http.get('/assets/data/songs.json');
-  }
-
   getLastEditRights(){
     return this.lastEditRights;
   }
 
-  getRemoteData() {
+  getRemoteData() { // laat ik staan als voorbeeld
     return this.http.get('https://weerlive.nl/api/json-data-10min.php?key=demo&locatie=Amsterdam');
   }
 

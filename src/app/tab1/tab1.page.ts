@@ -7,10 +7,6 @@ import { DataService } from '../services/data.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  songs: any;
-  songs2 ;
-  weather ;
-  zinnen;
 
 
   zinnen2;
@@ -34,6 +30,10 @@ export class Tab1Page {
   nu = new Date();
   verstrekenZin = 0;
   verstrekenMeerdereZinnen = 0;
+  tussenTijdMeerdereZinnen = {
+    aantalZinnen: 0,
+    tussenTijd: 0
+  };
   timeIntervalZin; // 1 zin
   timerIntervalMeerdereZinnen; // meerdere zinnen bijv duur van een test
   startMomentZin = new Date();
@@ -83,7 +83,7 @@ export class Tab1Page {
       const n = '(' + this.nivo + ')';
       // alert('test');
       this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW, 'nee', n, 'random').subscribe(data => {
-        this.zinnen=data;
+
         this.zinnen2=JSON.parse(JSON.stringify(data));
         this.aantalZinnen = this.zinnen2.length;
 
@@ -98,6 +98,8 @@ export class Tab1Page {
         this.startTijdMetingZin();
         this.startTijdMetingMeerdereZinnen();
         this.geraden = [];
+        this.tussenTijdMeerdereZinnen.aantalZinnen= 0;
+        this.tussenTijdMeerdereZinnen.tussenTijd= 0;
       });
     }
 
@@ -190,9 +192,11 @@ export class Tab1Page {
   }
 
   verwerkTijd(){  // ******************** TOEVOEGEN AAN geraden LIJST ********************
+    this.tussenTijdMeerdereZinnen.tussenTijd=this.verstrekenMeerdereZinnen;
     this.geraden.unshift({zin: this.actualZin, correct: this.actualZinCorrect,
       tijd: this.verstrekenZin, geraden: this.zinGeraden, gelijk: this.zinGelijk,
       geradenTekst: this.zinGeradenTekst, zinBkColor: this.zinBkColor, id: this.zinId});
+    this.tussenTijdMeerdereZinnen.aantalZinnen=this.geraden.length;
     // alert(this.actualZin + ' ' + this.verstreken + ' ' + this.geraden[0].tekst);
     console.log(this.geraden);
   }
@@ -223,14 +227,6 @@ export class Tab1Page {
     // this.addNewScoreToDatabaseApi(); // niet handig, beter uitdenken
   }
 
-  mapData(){
-    this.songs2 = this.songs2.map((myItem) => myItem);
-    console.log(this.songs2);
-  }
-
-  mapData2(){
-    this.songs2 = this.songs2.map((myItem) => myItem);
-  }
 
   nextZin(goed: boolean){
     this.beoordeelZin(goed);
