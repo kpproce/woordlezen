@@ -59,37 +59,45 @@
 <ion-content [fullscreen]="true">
 
   <ion-grid class="background2" >
-    <ion-row color="primary" justify-content-center>
-      <ion-col align-self-center size-xs="8.5" size-md="8.5" size-lg="8.5"  >
-        <span [style.color]="zinStyle" class="padleft x-large"> {{actualNivo}}: {{actualZin}} </span>
+    <ion-row color="primary" >
+      <ion-col align-left size-xs="12" size-md="12" size-lg="12"  >
+        <span [style.color]="zinStyle" class="padleft xx-small"> nivo: ({{actualNivo}})</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row color="primary" >
+      <ion-col align-left size-xs="12" size-md="12" size-lg="12"  >
+        <span [style.color]="zinStyle" class="padleft xx-large">{{actualZin}} </span>
       </ion-col>
 
     </ion-row>
-     <ion-row color="primary" justify-content-center>
-
-          <ion-col align-self-center size-xs="3.7" size-md="3.5" size-lg="3.5"  >
+     <ion-row color="primary" justify-content-cente.>
+        <ion-col align-self-center size-xs="8.5" size-md="8.5" size-lg="8.5"  >
+          <ion-col align-self-center size-xs="6" size-md="6" size-lg="6"  >
             <ion-button size="large" color="success" (click)="nextZin(true)" tooltip="nog invullen">
               GOED
             </ion-button>
           </ion-col>
-          <ion-col align-self-center size-xs="4"  size-md="6" size-lg="6"  >
+          <ion-col align-self-center size-xs="6"  size-md="6" size-lg="6"  >
             <ion-button size="large" color="danger" (click)="nextZin(false)" tooltip="nog invullen">
               XX <span class="xx-small" >-fout</span>
             </ion-button>
           </ion-col>
-          <ion-col align-self-center size-xs="4" size-md="3.4" size-lg="3.4" >
-            <ion-button class="buttonTimerZinReset" (click)="resetTijdZin() " tooltip="nog invullen">
-              {{verstrekenZin}} <span class="xx-small">- Reset</span>
-            </ion-button>
-          </ion-col>
+        </ion-col>
+
+        <ion-col align-self-center size-xs="3.5" size-md="3.5" size-lg="3.5" >
+          <ion-button class="buttonTimerZinReset" (click)="resetTijdZin() " tooltip="nog invullen">
+            {{verstrekenZin}} <span class="xx-small">- Reset</span>
+          </ion-button>
+        </ion-col>
 
     </ion-row>
   </ion-grid>
-
+ <br>
   <ion-grid>
     <ion-row color="primary" justify-content-center>
       <ion-col class="border1 small" size-xs="6" size-md="6" size-lg="6">
-        <span>{{geraden.length}} zinnen </span>
+        <span class="large">{{geraden.length}}</span> zinnen
 
         <ion-button size="small" (click)="getZinnen()" tooltip="nog invullen">
           Reload <datalist></datalist>
