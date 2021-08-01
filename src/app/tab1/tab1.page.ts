@@ -165,26 +165,26 @@ export class Tab1Page {
       if (goed) {
         this.zinGeradenTekst = 'CORRECT de zin was goed';
         this.zinGeraden = true;
-        this.zinBkColor = '#ecffe0'; //goed
+        this.zinBkColor = 'LightGreen'; //goed
       }
       else {
-        this.zinGeradenTekst = 'ZIN was wel GOED';
+        this.zinGeradenTekst = 'ZIN was GOED';
         this.zinGeraden = false;
-        this.zinBkColor = '#fcf3f0'; //fout
+        this.zinBkColor = 'DarkSalmon'; //fout
       }
 
     } else { // de zinnen waren ongelijk en dus is een foute aangeboden
       this.zinGelijk = false;
 
       if (goed) { // jij dacht goed, maar het was fout
-        this.zinGeradenTekst = 'ZIN was toch FOUT';
+        this.zinGeradenTekst = 'ZIN was FOUT';
         this.zinGeraden = false;
-        this.zinBkColor = '#fcf3f0'; //fout
+        this.zinBkColor = 'DarkSalmon'; //fout
       }
       else { // zin ongelijk en dat dacgt jij ook
         this.zinGeradenTekst = 'CORRECT de zin was FOUT';
         this.zinGeraden = true;
-        this.zinBkColor = '#ecffe0'; //goed
+        this.zinBkColor = 'LightGreen'; //goed
       }
     }
   }
@@ -201,7 +201,7 @@ export class Tab1Page {
     this.startMomentZin= new Date();
     // this.tijdVerstreken= (Math.floor((Date.now().valueOf() - this.startDate.valueOf())/100)/10);
     this.startDateZin = new Date();
-    this.zinStyle =  'rgb(10, 10, 10)';
+    this.zinStyle =  'Black';
     // alert('resetTijd voor 1 zin aangeroepen');
   }
 
@@ -210,7 +210,7 @@ export class Tab1Page {
     // this.tijdVerstreken= (Math.floor((Date.now().valueOf() - this.startDate.valueOf())/100)/10);
     this.startDateMeerdereZinnen = new Date();
     this.resetTijdZin();
-    this.zinStyle =  'rgb(10, 10, 10)';
+    this.zinStyle =  'Black';
 
     // alert('resetTijd meerdere zinnen aangeroepen');
   }
@@ -250,7 +250,6 @@ export class Tab1Page {
     else {
       this.actualZin = 'geen data gevonden checkdata connectie';
     }
-
   }
 
   getZinTekstColor() {
@@ -260,12 +259,10 @@ export class Tab1Page {
       {return 'color:white; background-color: red;';}
   }
 
-  getGeradenZinBkColor() {
+  getGeradenZinBkColor() { // niet in gebruik??
     if (this.zinGelijk )
-      {return 'orange';}
+      {return 'Orange';}
     else
-      {return 'yellow';}
+      {return 'Yellow';}
   }
-
-
 }
