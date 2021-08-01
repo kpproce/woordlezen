@@ -1,12 +1,55 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <!-- <ion-title> -->
 
       <ion-grid>
         <ion-row color="primary" justify-content-center>
 
-          <ion-col align-self-center class="x-small" size-xs="9" size-md="9" size-lg="9">
+          <ion-col align-self-center class="small" size-xs="9" size-md="9" size-lg="9">
             Test leessnelheid {{this.aantalZinnen}} zinnen.
+
+            <ion-row color="primary" justify-content-center>
+
+              <ion-col size-xs="12" size-md="12" size-lg="12">
+                  <ion-row color="primary" justify-content-center>
+                    <ion-col align-self-center  size-xs="6" size-md="6" size-lg="6">
+
+                      <ion-col align-self-center  size-xs="5" size-md="5" size-lg="5">
+                          <ion-label >snelheid</ion-label>
+                      </ion-col>
+                      <ion-col align-self-center  size-xs="7" size-md="7" size-lg="7">
+                          <ion-select class="nivoOptions ion-no-padding" placeholder="Select One" [(ngModel)]='snelheid' (ionChange)="onchangeSnelheid()"> snelheid
+                            <ion-select-option value="slak">slak</ion-select-option>
+                            <ion-select-option value="langzaam">langzaam</ion-select-option>
+                            <ion-select-option value="normaal">normaal</ion-select-option>
+                            <ion-select-option value="snel">snel</ion-select-option>
+                            <ion-select-option value="jaguar">jaguar</ion-select-option>
+                          </ion-select>
+                      </ion-col>
+                    </ion-col>
+
+                    <ion-col align-self-center  size-xs="6" size-md="6" size-lg="6">
+                      <ion-col align-self-center  size-xs="4" size-md="4" size-lg="4">
+                        <ion-label >nivo</ion-label>
+                      </ion-col>
+
+                      <ion-col align-self-center  size-xs="7" size-md="7" size-lg="7">
+                          <ion-select class="nivoOptions ion-no-padding" multiple="true" [(ngModel)]='nivo' >
+                            <ion-select-option value="0">0</ion-select-option>
+                            <ion-select-option value="1">1</ion-select-option>
+                            <ion-select-option value="2">2</ion-select-option>
+                            <ion-select-option value="3">3</ion-select-option>
+                            <ion-select-option value="4">4</ion-select-option>
+                          </ion-select>
+                        </ion-col>
+                      </ion-col>
+
+                  </ion-row>
+              </ion-col>
+
+            </ion-row>
+
+
           </ion-col>
           <ion-col align-self-center size-xs="3"size-md="3" size-lg="3">
             <ion-button class="medium" [color]="dataService.getLoginButtonColor()" [routerLink]="['/login'] ">
@@ -17,43 +60,9 @@
         </ion-row>
 
 
-        <ion-row color="primary" justify-content-center>
-
-          <ion-col size-xs="8" size-md="8" size-lg="8">
-              <ion-row color="primary" justify-content-center>
-                <ion-col align-self-center  size-xs="4" size-md="4" size-lg="4">
-                  <ion-label >snelheid</ion-label>
-                </ion-col>
-                <ion-col align-self-center  size-xs="7" size-md="7" size-lg="7">
-                  <ion-select class="nivoOptions ion-no-padding" placeholder="Select One" [(ngModel)]='snelheid' (ionChange)="onchangeSnelheid()"> snelheid
-                    <ion-select-option value="slak">slak</ion-select-option>
-                    <ion-select-option value="langzaam">langzaam</ion-select-option>
-                    <ion-select-option value="normaal">normaal</ion-select-option>
-                    <ion-select-option value="snel">snel</ion-select-option>
-                    <ion-select-option value="jaguar">jaguar</ion-select-option>
-                  </ion-select>
-                </ion-col>
-              </ion-row>
-              <ion-row color="primary" justify-content-center>
-                    <ion-col align-self-center  size-xs="4" size-md="4" size-lg="4">
-                      <ion-label >nivo</ion-label>
-                    </ion-col>
-                    <ion-col align-self-center  size-xs="7" size-md="7" size-lg="7">
-                      <ion-select class="nivoOptions ion-no-padding" multiple="true" [(ngModel)]='nivo' >
-                        <ion-select-option value="0">0</ion-select-option>
-                        <ion-select-option value="1">1</ion-select-option>
-                        <ion-select-option value="2">2</ion-select-option>
-                        <ion-select-option value="3">3</ion-select-option>
-                        <ion-select-option value="4">4</ion-select-option>
-                      </ion-select>
-                    </ion-col>
-              </ion-row>
-          </ion-col>
-
-        </ion-row>
       </ion-grid>
         <!-- info (testen) {{snelheid}} {{warningTijd}} {{warningTijd2}} {{actualNivo}} --nivopercentage:- {{(duurFactor)}} -->
-    </ion-title>
+    <!-- </ion-title> -->
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
