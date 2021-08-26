@@ -215,6 +215,16 @@ export class Tab1Page {
     // alert (' verwerktijd aangeroepen: ' + this.tussenTijdMeerdereZinnen.aantalZinnen + ' correct: ' + this.actualZinCorrect);
   }
 
+  aantalGoed() {
+    let aantal= 0;
+    this.geraden.forEach((item, index) => {
+      if (item.geraden) {aantal +=1;}
+      // alert(item.zin + ' geraden:' + item.geraden + ' aantal:' + aantal);
+    });
+    return aantal;
+
+  }
+
   resetTijdZin(){
     this.startMomentZin= new Date();
     // this.tijdVerstreken= (Math.floor((Date.now().valueOf() - this.startDate.valueOf())/100)/10);
@@ -263,7 +273,7 @@ export class Tab1Page {
         this.pauze=true;
         alert((this.tussenTijdMeerdereZinnen.aantalZinnen-1) +
         ' zinnen in ' + this.tussenTijdMeerdereZinnen.tussenTijd + ' sec, ' +
-        this.tussenTijdMeerdereZinnen.aantalGoed + ' GOED') ;
+        this.aantalGoed() + ' GOED!') ;
 
       } else {
         this.pauze = false;
