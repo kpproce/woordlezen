@@ -80,7 +80,7 @@
         </ion-col>
         <ion-col align-self-center size-xs="5" size-md="5" size-lg="5" >
           <ion-button class="buttonTimerZinReset" (click)="resetTijdZin() " tooltip="nog invullen">
-            {{verstrekenZin}} <span class="xx-small">- opnieuw</span>
+            {{verstrekenZin}} <span class="xx-small">- reset</span>
           </ion-button>
         </ion-col>
     </ion-row>
@@ -90,8 +90,8 @@
   <ion-grid>
     <ion-row color="primary" justify-content-center>
       <ion-col class="border1 small" size-xs="6" size-md="6" size-lg="6">
-        <span class="x-large">{{tussenTijdMeerdereZinnen.aantalZinnen-1}}</span> zinnen in
-        <span class="x-large">{{tussenTijdMeerdereZinnen.tussenTijd}}</span> sec.
+        <span class="x-large">{{aantalGoed()}} </span>  goed van <span class="x-large">{{geraden.length}}</span> zinnen in
+        <span class="x-large">{{tussenTijdMeerdereZinnen.tussenTijd}}</span> sec
       </ion-col>
       <ion-col class="border1 x-small" size-xs="6" size-md="6" size-lg="6">
         <span class="x-large">{{verstrekenMeerdereZinnen}}</span>
@@ -100,7 +100,7 @@
           <ion-icon slot="icon-only" name="refresh"></ion-icon>
         </ion-button> -->
         <ion-button size="small" (click)="getZinnen()" tooltip="nog invullen">
-          Reload <datalist></datalist>
+          Nieuwe <span class="xx-small" > -zinnen</span><datalist></datalist>
         </ion-button>
       </ion-col>
     </ion-row>
