@@ -34,9 +34,14 @@
   background-color: rgb(239, 246, 255);
 }
 
-.nivoOptions {
-  width: 120px;
-}
+.speed::before        { content: "SPEED: "; }
+.speed                { max-width: 130px; }
+
+.nivoOptions::before  { content: "NIVO: "; }
+.nivoOptions          { max-width: 160px; margin-top: 4px;}
+
+.bevat::before        { content: "BEVAT: "; }
+.bevat                { max-width: 160px; margin-top: 4px;}
 
 .buttonTimerZinReset {
   padding: 2px;
@@ -59,6 +64,13 @@ ion-input {
 ion-select {
   background-color: rgb(231, 228, 245);
   color:rgb(5, 1, 20);
+  // height: 400px;
+}
+
+/* Popover Interface: set color for the popover using Item's CSS variables */
+.my-custom-interface .select-interface-option {
+  --color: #971e49;
+  --color-hover: #79193b;
 }
 
 .lightRed { background-color: rgb(236, 193, 193); }
@@ -69,15 +81,22 @@ ion-select {
   height: 1.8REM;
 }
 
+ion-select-option{
+  height: 20px;
+  color: aqua;
+  background-color: beige;
+}
+
 @media screen and (min-width: 640px){
   ion-select {
     font-size: large;
   }
-
+  .speed                { max-width: 200px; }
+  .nivoOptions          { max-width: 220px; }
+  .bevat                { max-width: 220px; margin-top: 4px;}
 
   .login{
     width: 7REM;
     height: 2.2REM;
   }
-
 }

@@ -11,8 +11,10 @@ export class Tab1Page {
 
   zinnen2;
   aantalZinnen = 0;
+  aantalZinnenOver = 0;
   startDateZin = new Date();
   startDateMeerdereZinnen = new Date();
+  pauze = false;
 
   tijdVerstreken: number ;
 
@@ -32,7 +34,8 @@ export class Tab1Page {
   verstrekenMeerdereZinnen = 0;
   tussenTijdMeerdereZinnen = {
     aantalZinnen: 0,
-    tussenTijd: 0
+    tussenTijd: 0,
+    aantalGoed: 0
   };
   timeIntervalZin; // 1 zin
   timerIntervalMeerdereZinnen; // meerdere zinnen bijv duur van een test
@@ -48,6 +51,7 @@ export class Tab1Page {
 
   snelheid = 'normaal'; // slak, langzaam, normaal, snel, jaguar
   nivo = ['1','2','3','4'];
+  bevat = ['all'];
   zinStyle = 'rgb(10, 10, 10)';
   wwClass='small login lightRed';
   buttonIngelogdColor = 'warning';
@@ -77,15 +81,20 @@ export class Tab1Page {
       if (this.snelheid==='normaal')  {  this.warningTijd = 5;    this.warningTijd2 = 8;  this.maxTijd = 10; }
       if (this.snelheid==='snel')     { this.warningTijd = 3;     this.warningTijd2 = 5;  this.maxTijd = 8; }
       if (this.snelheid==='jaguar')   {  this.warningTijd = 0.5;  this.warningTijd2 = 1;  this.maxTijd = 2; }
+      this.getZinnen();
     }
 
     getZinnen() { // ******************** RELOAD ***************
-      const n = '(' + this.nivo + ')';
+      const nivo = '(' + this.nivo + ')';
+      const bevat = '(' + this.bevat + ')';
       // alert('test');
-      this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW, 'nee', n, 'random').subscribe(data => {
+
+      this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
+        'nee', nivo, bevat, 'random').subscribe(data => {
 
         this.zinnen2=JSON.parse(JSON.stringify(data));
         this.aantalZinnen = this.zinnen2.length;
+        this.aantalZinnenOver =  this.zinnen2.length;
 
         this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
         this.zinId = this.zinnen2[this.zinnenIndex].id;
@@ -100,6 +109,8 @@ export class Tab1Page {
         this.geraden = [];
         this.tussenTijdMeerdereZinnen.aantalZinnen= 0;
         this.tussenTijdMeerdereZinnen.tussenTijd= 0;
+        this.tussenTijdMeerdereZinnen.aantalGoed= 0;
+        this.pauze=false;
       });
     }
 
@@ -143,7 +154,7 @@ export class Tab1Page {
         if (this.verstrekenZin  > (this.warningTijd2 * this. duurFactor) ){
           this.zinStyle = 'rgb(250, 170, 170)';
         };
-        if (this.verstrekenZin >= this.maxTijd){
+        if (this.verstrekenZin >= this.maxTijd || this.pauze){
           this.verstrekenZin = this.maxTijd;
           this.zinStyle = 'rgb(250, 1, 1)';
           // backgroud 245, 244, 237
@@ -154,8 +165,9 @@ export class Tab1Page {
 
   startTijdMetingMeerdereZinnen() { // meerdere zinnen bijv een test
     this.timerIntervalMeerdereZinnen = setInterval(function() {
-      this.verstrekenMeerdereZinnen = (Math.floor(( new Date().valueOf() - this.startMomentMeerdereZinnen.valueOf())/1000));
-
+      if (!this.pauze) {
+        this.verstrekenMeerdereZinnen = (Math.floor(( new Date().valueOf() - this.startMomentMeerdereZinnen.valueOf())/1000));
+      }
     }.bind(this),400);
 
   }
@@ -198,7 +210,9 @@ export class Tab1Page {
       geradenTekst: this.zinGeradenTekst, zinBkColor: this.zinBkColor, id: this.zinId});
     this.tussenTijdMeerdereZinnen.aantalZinnen=this.geraden.length;
     // alert(this.actualZin + ' ' + this.verstreken + ' ' + this.geraden[0].tekst);
-    console.log(this.geraden);
+    // alert ('VOOR  verwerktijd aangeroepen: ' + this.tussenTijdMeerdereZinnen.aantalZinnen + ' correct: ' + this.actualZinCorrect);
+    if (this.actualZinCorrect) { this.tussenTijdMeerdereZinnen.aantalZinnen +=1; };
+    // alert (' verwerktijd aangeroepen: ' + this.tussenTijdMeerdereZinnen.aantalZinnen + ' correct: ' + this.actualZinCorrect);
   }
 
   resetTijdZin(){
@@ -227,21 +241,38 @@ export class Tab1Page {
     // this.addNewScoreToDatabaseApi(); // niet handig, beter uitdenken
   }
 
-
   nextZin(goed: boolean){
     this.beoordeelZin(goed);
+
     if (this.aantalZinnen>0) {
-      this.zinnenIndex ++;
+      // this.zinnenIndex ++;
       if (this.zinnenIndex > this.zinnen2.length) {
         this.zinnenIndex = 0;
+        // alert ('aantal; zinnen: ' + this.zinnen2.length + ' ' + this.zinnenIndex);
       }
       this.hoelangZin();
       this.verwerkTijd();
-      this.zinStyle = 'rgb(10, 10, 10)';
-      this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
-      this.actualZinCorrect = this.zinnen2[this.zinnenIndex].tekstCorrect;
-      this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
-      this.duurFactor = 1 + (this.actualNivo -2 )/5;
+
+      this.zinnen2.splice(0, 1);  // verwijder de eerste regel, zodat dezelfde niet nog een keer gevraagd wordt.
+      if (this.zinnen2.length<1) {
+        this.actualZin = 'alle zinnen gehad, klik reload voor een nieuwe lijst';
+        // stop de tijd
+
+        // clearInterval(this.timeIntervalZin);
+        // clearInterval(this.timerIntervalMeerdereZinnen);
+        this.pauze=true;
+        alert((this.tussenTijdMeerdereZinnen.aantalZinnen-1) +
+        ' zinnen in ' + this.tussenTijdMeerdereZinnen.tussenTijd + ' sec, ' +
+        this.tussenTijdMeerdereZinnen.aantalGoed + ' GOED') ;
+
+      } else {
+        this.pauze = false;
+        this.zinStyle = 'rgb(10, 10, 10)';
+        this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+        this.actualZinCorrect = this.zinnen2[this.zinnenIndex].tekstCorrect;
+        this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
+        this.duurFactor = 1 + (this.actualNivo -2 )/5;
+      }
     }
     else {
       this.actualZin = 'geen data gevonden checkdata connectie';
@@ -261,4 +292,9 @@ export class Tab1Page {
     else
       {return 'Yellow';}
   }
+
+  test() {
+    alert('test uitgevoerd');
+   }
+
 }

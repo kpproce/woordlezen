@@ -1,133 +1,109 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <!-- <ion-title> -->
-
       <ion-grid>
         <ion-row color="primary" justify-content-center>
-
-          <ion-col align-self-center class="small" size-xs="9" size-md="9" size-lg="9">
+          <ion-col align-self-center class="small" size-xs="4" size-md="4" size-lg="4">
             Test leessnelheid {{this.aantalZinnen}} zinnen.
-
+          </ion-col>
+          <ion-col align-self-center class="small" size-xs="4" size-md="4" size-lg="4">
             <ion-row color="primary" justify-content-center>
-
-              <ion-col size-xs="12" size-md="12" size-lg="12">
-                  <ion-row color="primary" justify-content-center>
-                    <ion-col align-self-center  size-xs="6" size-md="6" size-lg="6">
-
-                      <ion-col align-self-center  size-xs="5" size-md="5" size-lg="5">
-                          <ion-label >snelheid</ion-label>
-                      </ion-col>
-                      <ion-col align-self-center  size-xs="7" size-md="7" size-lg="7">
-                          <ion-select class="nivoOptions ion-no-padding" placeholder="Select One" [(ngModel)]='snelheid' (ionChange)="onchangeSnelheid()"> snelheid
-                            <ion-select-option value="slak">slak</ion-select-option>
-                            <ion-select-option value="langzaam">langzaam</ion-select-option>
-                            <ion-select-option value="normaal">normaal</ion-select-option>
-                            <ion-select-option value="snel">snel</ion-select-option>
-                            <ion-select-option value="jaguar">jaguar</ion-select-option>
-                          </ion-select>
-                      </ion-col>
-                    </ion-col>
-
-                    <ion-col align-self-center  size-xs="6" size-md="6" size-lg="6">
-                      <ion-col align-self-center  size-xs="4" size-md="4" size-lg="4">
-                        <ion-label >nivo 0-1-2-3-4</ion-label>
-                      </ion-col>
-
-                      <ion-col align-self-center  size-xs="7" size-md="7" size-lg="7">
-                          <ion-select class="nivoOptions ion-no-padding" multiple="true" [(ngModel)]='nivo' >
-                            <ion-select-option value="0">0</ion-select-option>
-                            <ion-select-option value="1">1</ion-select-option>
-                            <ion-select-option value="2">2</ion-select-option>
-                            <ion-select-option value="3">3</ion-select-option>
-                            <ion-select-option value="4">4</ion-select-option>
-                          </ion-select>
-                        </ion-col>
-                      </ion-col>
-
-                  </ion-row>
-              </ion-col>
-
+              <ion-select class="speed ion-no-padding" placeholder="Select One" [(ngModel)]='snelheid' (ionChange)="onchangeSnelheid()"> snelheid
+                <ion-select-option value="slak">slak</ion-select-option>
+                <ion-select-option value="langzaam">langzaam</ion-select-option>
+                <ion-select-option value="normaal">normaal</ion-select-option>
+                <ion-select-option value="snel">snel</ion-select-option>
+                <ion-select-option value="jaguar">jaguar</ion-select-option>
+              </ion-select>
             </ion-row>
-
-
+            <ion-row color="primary" justify-content-center>
+              <ion-select class="nivoOptions ion-no-padding" multiple="true" [(ngModel)]='nivo'
+              (ionChange)="getZinnen()">
+                <ion-select-option value="0">0</ion-select-option>
+                <ion-select-option value="1">1</ion-select-option>
+                <ion-select-option value="2">2</ion-select-option>
+                <ion-select-option value="3">3</ion-select-option>
+                <ion-select-option value="4">4</ion-select-option>
+              </ion-select>
+            </ion-row>
+            <ion-row color="primary" justify-content-center>
+              <ion-select class="bevat ion-no-padding" multiple="true" [(ngModel)]='bevat'
+                (ionChange)="getZinnen()">
+                <ion-select-option value="all">alle letters</ion-select-option>
+                <ion-select-option value="au">au</ion-select-option>
+                <ion-select-option value="ou">ou</ion-select-option>
+                <ion-select-option value="ei">ei</ion-select-option>
+                <ion-select-option value="ij">ij</ion-select-option>
+                <ion-select-option value="ui">ui</ion-select-option>
+                <ion-select-option value="oe">oe</ion-select-option>
+                <ion-select-option value="ie">ie</ion-select-option>
+                <ion-select-option value="eu">eu</ion-select-option>
+              </ion-select>
+            </ion-row>
           </ion-col>
           <ion-col align-self-center size-xs="3"size-md="3" size-lg="3">
             <ion-button class="medium" [color]="dataService.getLoginButtonColor()" [routerLink]="['/login'] ">
               Login
             </ion-button>
           </ion-col>
-
         </ion-row>
-
-
       </ion-grid>
         <!-- info (testen) {{snelheid}} {{warningTijd}} {{warningTijd2}} {{actualNivo}} --nivopercentage:- {{(duurFactor)}} -->
     <!-- </ion-title> -->
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-
   <ion-grid class="background2" >
     <ion-row color="primary" >
       <ion-col align-left size-xs="12" size-md="12" size-lg="12"  >
-        <span [style.color]="zinStyle" class="padleft xx-small"> nivo: ({{actualNivo}})</span>
+        <span [style.color]="zinStyle" class="padleft xx-small"> nivo: ({{actualNivo}}) </span>
+        nog {{zinnen2.length}} zinnen
       </ion-col>
     </ion-row>
-
     <ion-row color="primary" >
       <ion-col align-left size-xs="12" size-md="12" size-lg="12"  >
         <span [style.color]="zinStyle" class="padleft xx-large">{{actualZin}} </span>
       </ion-col>
-
     </ion-row>
      <ion-row color="primary" justify-content-cente.>
-        <ion-col align-self-center size-xs="7.5" size-md="7.5" size-lg="7.5"  >
-          <ion-col align-self-center size-xs="6" size-md="6" size-lg="6"  >
+        <ion-col align-self-center size-xs="7" size-md="7" size-lg="7"  >
+          <ion-col align-self-center size-xs="4" size-md="4" size-lg="4"  >
             <ion-button size="large" color="success" (click)="nextZin(true)" tooltip="nog invullen">
-              GOED
+              <ion-icon slot="icon-only" name="thumbs-up"></ion-icon>
             </ion-button>
           </ion-col>
-          <ion-col align-self-center size-xs="6"  size-md="6" size-lg="6"  >
+          <ion-col align-self-center size-xs="4"  size-md="4" size-lg="4"  >
             <ion-button size="large" color="danger" (click)="nextZin(false)" tooltip="nog invullen">
-              XX <span class="xx-small" >-fout</span>
+              X <span class="xx-small" >fout</span>
             </ion-button>
           </ion-col>
         </ion-col>
-
-        <ion-col align-self-center size-xs="4.5" size-md="4.5" size-lg="4.5" >
+        <ion-col align-self-center size-xs="5" size-md="5" size-lg="5" >
           <ion-button class="buttonTimerZinReset" (click)="resetTijdZin() " tooltip="nog invullen">
-            {{verstrekenZin}} <span class="xx-small">- Zin Opnieuw</span>
+            {{verstrekenZin}} <span class="xx-small">- opnieuw</span>
           </ion-button>
         </ion-col>
-
     </ion-row>
   </ion-grid>
+
  <br>
   <ion-grid>
     <ion-row color="primary" justify-content-center>
       <ion-col class="border1 small" size-xs="6" size-md="6" size-lg="6">
-        <span class="x-large">{{tussenTijdMeerdereZinnen.aantalZinnen}}</span> zinnen in
+        <span class="x-large">{{tussenTijdMeerdereZinnen.aantalZinnen-1}}</span> zinnen in
         <span class="x-large">{{tussenTijdMeerdereZinnen.tussenTijd}}</span> sec.
-
-
       </ion-col>
       <ion-col class="border1 x-small" size-xs="6" size-md="6" size-lg="6">
-
         <span class="x-large">{{verstrekenMeerdereZinnen}}</span>
         (totale tijd)
        <!--  <ion-button size="small" (click)="resetTijdMeerdereZinnen()" tooltip="nog invullen">
           <ion-icon slot="icon-only" name="refresh"></ion-icon>
         </ion-button> -->
-
         <ion-button size="small" (click)="getZinnen()" tooltip="nog invullen">
           Reload <datalist></datalist>
         </ion-button>
-
       </ion-col>
-
     </ion-row>
-
-
     <ion-row color="primary" justify-content-center *ngFor="let geradenItem of geraden; let i = index"
     [ngStyle]="{
       'background-color':  geradenItem.zinBkColor,

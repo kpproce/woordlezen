@@ -9,7 +9,7 @@ export class DataService {
 
   // **********   LOKAAL TESTEN?   **************************************************
 
-  lokaalTesten = false; // zet op true om localhost (test) als API bron te gebruiken
+  lokaalTesten = true; // zet op true om localhost (test) als API bron te gebruiken
 
   // ********************************************************************************
 
@@ -27,8 +27,8 @@ export class DataService {
     return this.http.get('https://weerlive.nl/api/json-data-10min.php?key=demo&locatie=Amsterdam');
   }
 
-  getDataZinnen(userName: string, userWW: string, deleted: string, nivoMulti: string, order: string) {
-    const params = '?userName='+ userName + '&userWW=' + userWW + '&nivoMulti='+ nivoMulti + '&showDeleted=' +
+  getDataZinnen(userName: string, userWW: string, deleted: string, nivoMulti: string, bevat: string, order: string) {
+    const params = '?userName='+ userName + '&userWW=' + userWW + '&nivoMulti='+ nivoMulti + '&contains=' + bevat + '&showDeleted=' +
     deleted + '&order=' + order;
     if (this.lokaalTesten) {
       return this.http.get('http://localhost/php_api_test/apiBasic/read_zinnen.php' + params );

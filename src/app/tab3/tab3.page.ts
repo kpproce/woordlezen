@@ -28,7 +28,9 @@ export class Tab3Page {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW, 'all', '0,1,2,3,4)', 'id').subscribe(data => {
+    // getDataZinnen(userName: string, userWW: string, deleted: string, nivoMulti: string, bevat: string, order: string)
+    this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
+        'all', '0,1,2,3,4)', 'all', 'id').subscribe(data => {
       this.zinnen=data;
       this.zinnen2=JSON.parse(JSON.stringify(data));
       this.aantalZinnen = this.zinnen2.length;
@@ -38,7 +40,8 @@ export class Tab3Page {
 
   ionViewWillEnter(){
     this.teller=0;
-    this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW, 'all', '(0,1,2,3,4)', 'id').subscribe(data => {
+    this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
+        'all', '(0,1,2,3,4)', 'all','id').subscribe(data => {
       this.zinnen=data;
       this.zinnen2=JSON.parse(JSON.stringify(data));
       this.aantalZinnen = this.zinnen2.length;
@@ -54,7 +57,8 @@ export class Tab3Page {
       this.resultFromDataService=result;
       // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
       this.resultFromDataServiceTXT = JSON.stringify(result);
-      this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW, 'all', '(1,2,3,4)','id').subscribe(data => {
+      this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
+          'all', '(1,2,3,4)', 'all', 'id').subscribe(data => {
         this.zinnen=data;
         this.zinnen2=JSON.parse(JSON.stringify(data));
         this.aantalZinnen = this.zinnen2.length;
