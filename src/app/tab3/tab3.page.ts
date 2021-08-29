@@ -8,6 +8,7 @@ import { DataService } from '../services/data.service';
 })
 export class Tab3Page {
 
+  laatsteZinID = 0;
   teller = 0;
   idVanAangepasteZin = 0;
   zinnen;
