@@ -90,7 +90,7 @@ export class Tab1Page {
       // alert('test');
 
       this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
-        'nee', nivo, bevat, 20, 'random').subscribe(data => {
+        'nee', nivo, bevat, 20, -1, 'random').subscribe(data => {
 
         this.zinnen2=JSON.parse(JSON.stringify(data));
         this.aantalZinnen = this.zinnen2.length;

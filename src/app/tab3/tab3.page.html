@@ -14,7 +14,13 @@
       </ion-row>
       <ion-row>
         <ion-col class="small" align-self-center size-xs="7"size-md="7" size-lg="7">
-           {{info}}
+           <!-- {{info}} -->
+           <ion-button size="large" color="" (click)="setLaatsteZinID('first')" tooltip="nog invullen">
+            <span class="xx-small" >1 eerste</span>
+             </ion-button>
+           <ion-button size="large" color="" (click)="setLaatsteZinID('next')" tooltip="nog invullen">
+            <span class="x-large" >-> next</span>
+             </ion-button>
         </ion-col>
         <ion-col class="small" align-self-center size-xs="4"size-md="4" size-lg="4">
           <ion-input name="filter" type="text" placeholder="filter"

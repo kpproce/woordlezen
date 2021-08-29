@@ -29,9 +29,8 @@ export class Tab3Page {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    // getDataZinnen(userName: string, userWW: string, deleted: string, nivoMulti: string, bevat: string, order: string)
     this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
-        'all', '0,1,2,3,4)', 'all', -1, 'id').subscribe(data => {
+        'all', '0,1,2,3,4)', 'all', 100, this.laatsteZinID, 'id').subscribe(data => {
       this.zinnen=data;
       this.zinnen2=JSON.parse(JSON.stringify(data));
       this.aantalZinnen = this.zinnen2.length;
@@ -39,10 +38,28 @@ export class Tab3Page {
     });
   }
 
+  setLaatsteZinID(welke: string){ // gebruikt om volgende batch op te halen
+    if (welke === 'next') {
+      this.laatsteZinID = this.zinnen[this.zinnen2.length-1].id;
+     } else {
+      this.laatsteZinID = 0;
+     }
+
+    this.teller=0;
+    this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
+        'all', '(0,1,2,3,4)', 'all',100, this.laatsteZinID, 'id').subscribe(data => {
+      this.zinnen=data;
+      this.zinnen2=JSON.parse(JSON.stringify(data));
+      this.aantalZinnen = this.zinnen2.length;
+      this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+    });
+    // alert ('ionVi
+  }
+
   ionViewWillEnter(){
     this.teller=0;
     this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
-        'all', '(0,1,2,3,4)', 'all',-1, 'id').subscribe(data => {
+        'all', '(0,1,2,3,4)', 'all',100, this.laatsteZinID, 'id').subscribe(data => {
       this.zinnen=data;
       this.zinnen2=JSON.parse(JSON.stringify(data));
       this.aantalZinnen = this.zinnen2.length;
@@ -59,7 +76,7 @@ export class Tab3Page {
       // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
       this.resultFromDataServiceTXT = JSON.stringify(result);
       this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
-          'all', '(1,2,3,4)', 'all', -1, 'id').subscribe(data => {
+          'all', '(1,2,3,4)', 'all', -1, this.laatsteZinID, 'id').subscribe(data => {
         this.zinnen=data;
         this.zinnen2=JSON.parse(JSON.stringify(data));
         this.aantalZinnen = this.zinnen2.length;
@@ -84,7 +101,6 @@ export class Tab3Page {
       this.resultFromDataService=result;
       // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
       this.resultFromDataServiceTXT = JSON.stringify(result);
-
       const result2= JSON.parse(this.resultFromDataServiceTXT);
       this.dataOpgeslagen = (result2.ingelogd);
       this.dataService.lastEditRights  = result2.ingelogd; // dit moet cleaner..
