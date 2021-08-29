@@ -49,8 +49,8 @@ export class Tab1Page {
 
   info = '';
 
-  snelheid = 'normaal'; // slak, langzaam, normaal, snel, jaguar
-  nivo = ['1','2','3','4'];
+  snelheid = 'langzaam'; // slak, langzaam, normaal, snel, jaguar
+  nivo = ['1','2'];
   bevat = ['all'];
   zinStyle = 'rgb(10, 10, 10)';
   wwClass='small login lightRed';
@@ -76,10 +76,10 @@ export class Tab1Page {
     onchangeSnelheid(){
       // alert(this.snelheid);
       // nivo 1 = *  0,8      // nivo 2 = *  1      // nivo 3 = *  1,2      // nivo 4 = *  1,4
-      if (this.snelheid==='slak')     { this.warningTijd = 15;    this.warningTijd2 = 17; this.maxTijd = 20; }
-      if (this.snelheid==='langzaam') { this.warningTijd = 10;    this.warningTijd2 = 14; this.maxTijd = 17;}
-      if (this.snelheid==='normaal')  {  this.warningTijd = 5;    this.warningTijd2 = 8;  this.maxTijd = 10; }
-      if (this.snelheid==='snel')     { this.warningTijd = 3;     this.warningTijd2 = 5;  this.maxTijd = 8; }
+      if (this.snelheid==='slak')     { this.warningTijd = 20;    this.warningTijd2 = 22; this.maxTijd = 25; }
+      if (this.snelheid==='langzaam') { this.warningTijd = 15;    this.warningTijd2 = 17; this.maxTijd = 20;}
+      if (this.snelheid==='normaal')  {  this.warningTijd = 10;    this.warningTijd2 = 12;  this.maxTijd = 15; }
+      if (this.snelheid==='snel')     { this.warningTijd = 5;     this.warningTijd2 = 7;  this.maxTijd = 10; }
       if (this.snelheid==='jaguar')   {  this.warningTijd = 0.5;  this.warningTijd2 = 1;  this.maxTijd = 2; }
       this.getZinnen();
     }
@@ -90,7 +90,7 @@ export class Tab1Page {
       // alert('test');
 
       this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
-        'nee', nivo, bevat, 'random').subscribe(data => {
+        'nee', nivo, bevat, 20, 'random').subscribe(data => {
 
         this.zinnen2=JSON.parse(JSON.stringify(data));
         this.aantalZinnen = this.zinnen2.length;
@@ -287,6 +287,14 @@ export class Tab1Page {
     else {
       this.actualZin = 'geen data gevonden checkdata connectie';
     }
+  }
+
+  getZinSize(actualZin){
+   if (actualZin.length < 14 || this.actualNivo<2) {return 'xxx-large';
+  } else {
+    if (actualZin.length > 45 ) {return 'x-large';} else {return 'xx-large';}
+  }
+   // return 'xx-large';
   }
 
   getZinTekstColor() {
