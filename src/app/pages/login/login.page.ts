@@ -41,7 +41,6 @@ export class LoginPage implements OnInit {
     }
   }
 
-
   gotoTab1(){
     // this.navctrl.navigateRoot(["tabs/home"]);
   }

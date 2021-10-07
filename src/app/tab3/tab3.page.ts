@@ -13,11 +13,16 @@ export class Tab3Page {
   idVanAangepasteZin = 0;
   zinnen;
   zinnen2;
+  aantalZinnenVanApi = 0;
+  aantalZinnenVanApiObj;
+  aantalZinnenVanApiSQL=0;
   aantalZinnen = 0;
   zinnenIndex = 0;
   zinTekst ='leeg';
 
+  filterStringVooraf = 'a';
   filterString = '';
+  filterVoorafBegintMet = true ;
 
   resultFromDataService: any;
   resultFromDataServiceTXT = 'geen update info';
@@ -29,12 +34,17 @@ export class Tab3Page {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
+    /* voorbeeld:
+      this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
+      'nee', nivo, containsLetterGroups1, this.containsText, false, 20, -1, 'random').subscribe(data => {
+    */
     this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
-        'all', '0,1,2,3,4)', 'all', 100, this.laatsteZinID, 'id').subscribe(data => {
+        'all', '(0,1,2,3,4)', 'all', this.filterStringVooraf, this.filterVoorafBegintMet, 100, this.laatsteZinID, 'id').subscribe(data => {
       this.zinnen=data;
       this.zinnen2=JSON.parse(JSON.stringify(data));
       this.aantalZinnen = this.zinnen2.length;
       this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+
     });
   }
 
@@ -47,7 +57,7 @@ export class Tab3Page {
 
     this.teller=0;
     this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
-        'all', '(0,1,2,3,4)', 'all',100, this.laatsteZinID, 'id').subscribe(data => {
+        'all', '(0,1,2,3,4)', 'all', this.filterStringVooraf, this.filterVoorafBegintMet, 100, this.laatsteZinID, 'id').subscribe(data => {
       this.zinnen=data;
       this.zinnen2=JSON.parse(JSON.stringify(data));
       this.aantalZinnen = this.zinnen2.length;
@@ -59,13 +69,25 @@ export class Tab3Page {
   ionViewWillEnter(){
     this.teller=0;
     this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
-        'all', '(0,1,2,3,4)', 'all',100, this.laatsteZinID, 'id').subscribe(data => {
-      this.zinnen=data;
+        'all', '(0,1,2,3,4)', 'all', this.filterStringVooraf, this.filterVoorafBegintMet, 100, this.laatsteZinID, 'id').subscribe(data => {
       this.zinnen2=JSON.parse(JSON.stringify(data));
       this.aantalZinnen = this.zinnen2.length;
       this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
     });
+    this.dataService.getAantalDataZinnen('all', '(0,1,2,3,4)', 'all').subscribe(data => {
+      this.aantalZinnenVanApi = JSON.parse(JSON.stringify(data)).resultData[0].aantal;
+      console.log(this.aantalZinnenVanApi);
+      // this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+    });
     // alert ('ionView-Will-Enter');
+  }
+
+  handleCheckAantalZinnenViaApi(){
+    this.dataService.getAantalDataZinnen('all', '(0,1,2,3,4)', 'all').subscribe(data => {
+      this.aantalZinnenVanApi = JSON.parse(JSON.stringify(data)).resultData[0].aantal;
+      console.log(this.aantalZinnenVanApi);
+      // this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+    });
   }
 
   handleClickDelete(id: string){
@@ -76,7 +98,7 @@ export class Tab3Page {
       // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
       this.resultFromDataServiceTXT = JSON.stringify(result);
       this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
-          'all', '(1,2,3,4)', 'all', -1, this.laatsteZinID, 'id').subscribe(data => {
+          'all', '(1,2,3,4)', 'all', this.filterStringVooraf, this.filterVoorafBegintMet, -1, this.laatsteZinID, 'id').subscribe(data => {
         this.zinnen=data;
         this.zinnen2=JSON.parse(JSON.stringify(data));
         this.aantalZinnen = this.zinnen2.length;
@@ -133,6 +155,6 @@ export class Tab3Page {
   }
 
   onchangeZoekTekst(){
-
+    alert('zoektekst aangeroepen');
   }
 }

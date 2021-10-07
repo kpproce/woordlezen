@@ -13,19 +13,27 @@
 
       </ion-row>
       <ion-row>
-        <ion-col class="small" align-self-center size-xs="7"size-md="7" size-lg="7">
-           <!-- {{info}} -->
-           <ion-button size="large" color="" (click)="setLaatsteZinID('first')" tooltip="nog invullen">
-            <span class="xx-small" >1 eerste</span>
-             </ion-button>
-           <ion-button size="large" color="" (click)="setLaatsteZinID('next')" tooltip="nog invullen">
-            <span class="x-large" >-> next</span>
-             </ion-button>
-        </ion-col>
-        <ion-col class="small" align-self-center size-xs="4"size-md="4" size-lg="4">
-          <ion-input name="filter" type="text" placeholder="filter"
-            [(ngModel)]='filterString' (ionChange)="onchangeZoekTekst">
+          <span class="allign_middle margin-right"> {{'Bevat: '}}
+            <!--
+            <ion-checkbox item-left value="begin" [(ngModel)]='filterVoorafBegintMet'></ion-checkbox>
+            -->
+          </span>
+          <ion-input name="filter" type="text" placeholder="filter" [(ngModel)]='filterStringVooraf'>
           </ion-input>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="small" align-self-center size-xs="7"size-md="7" size-lg="7">
+          <!-- {{info}} -->
+          <ion-button size="large" color="" (click)="setLaatsteZinID('first')" tooltip="nog invullen">
+            <span class="xx-small" ><--</span>
+          </ion-button>
+          <ion-button size="large" color="" (click)="setLaatsteZinID('next')" tooltip="nog invullen">
+            <span class="x-large" >-> next</span>
+          </ion-button>
+          <ion-button size="large" color="" (click)="handleCheckAantalZinnenViaApi()" tooltip="nog invullen">
+            <span class="x-large" >Aantal {{aantalZinnen}} {{' / ' }} {{aantalZinnenVanApi}}</span>
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-title>
@@ -34,6 +42,12 @@
 
 <ion-content [fullscreen]="true">
    <ion-grid>
+    <ion-row>
+        <span class="allign_middle margin-right"> Filter onderstaande lijst:</span>
+        <ion-input name="filter" type="text" placeholder="filter hieronder"
+          [(ngModel)]='filterString'>
+        </ion-input>
+    </ion-row>
     <ion-row class="gridRowStyle" color="primary" justify-content-center *ngFor="let zin of zinnen2; let i = index"
     [ngStyle]="{
       'display': this.filterString===''?'block':
@@ -90,8 +104,8 @@
 
   </ion-grid>
   <h4>
-      Deze website is gemaakt door KdeCodeklopper versie 0.95 27-07-21
-      login scherm toegevoegd
+      Deze website is gemaakt door KdeCodeklopper versie 0.96 07-oktober-21
+      login scherm toegevoegd tab 3 filter aangepast vanwege grotere aantal woorden
       Doel is oefenen met woordjes, gemaakt op verzoek van een vriend die door een hersenbloeding deels opnieuw moest leren lezen.
       De website wordt gehoosd bij netlify, die de website host vanuit Github.
       De backend staat via een api bij bhosted. De website is gebouwd in Ionic 5/Angular10 en PHP(7 geloof ik)

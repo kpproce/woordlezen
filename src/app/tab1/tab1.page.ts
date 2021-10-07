@@ -51,7 +51,8 @@ export class Tab1Page {
 
   snelheid = 'langzaam'; // slak, langzaam, normaal, snel, jaguar
   nivo = ['1','2'];
-  bevat = ['all'];
+  containsLetterGroups = ['all'];
+  containsText = '';
   zinStyle = 'rgb(10, 10, 10)';
   wwClass='small login lightRed';
   buttonIngelogdColor = 'warning';
@@ -86,11 +87,14 @@ export class Tab1Page {
 
     getZinnen() { // ******************** RELOAD ***************
       const nivo = '(' + this.nivo + ')';
-      const bevat = '(' + this.bevat + ')';
+      const containsLetterGroups1 = '(' + this.containsLetterGroups + ')';
       // alert('test');
-
-      this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
-        'nee', nivo, bevat, 20, -1, 'random').subscribe(data => {
+      /* voorbeeld  getDataZinnen(userName: string, userWW: string, deleted: string, nivoMulti: string,
+      containsLetterGroups: string, containsText: string, containsTextStart: boolean, maxAantal: number,
+      eersteZinID: number, order: string)
+      */
+     this.dataService.getDataZinnen(this.dataService.userName, this.dataService.userWW,
+        'nee', nivo, containsLetterGroups1, this.containsText, false, 20, -1, 'random').subscribe(data => {
 
         this.zinnen2=JSON.parse(JSON.stringify(data));
         this.aantalZinnen = this.zinnen2.length;
