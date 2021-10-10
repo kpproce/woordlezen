@@ -62,8 +62,22 @@
     </ion-row>
     <ion-row color="primary" >
       <ion-col align-left size-xs="12" size-md="12" size-lg="12"  >
+          <div id="modalButtonContainer">
+             <ion-button id="modalEditButton" class="x-small" (click)="openIonModal()">
+
+              <ion-icon slot="icon-only" name="create"></ion-icon>
+
+            </ion-button>
+            <span id="modalEditHoverText">Klik button om tekst van deze zin te wijzigen</span>
+
+              <strong *ngIf="modelData">{{modelData}}</strong>
+          </div>
+          <!-- --- modal edit screen om zit direct te wijzigen-->
+
         <span [style.color]="zinStyle"  class="padleft {{getZinSize(actualZin)}}">{{actualZin}} </span>
+
       </ion-col>
+
     </ion-row>
      <ion-row color="primary" justify-content-cente.>
         <ion-col align-self-center size-xs="7" size-md="7" size-lg="7"  >
@@ -76,7 +90,8 @@
             <ion-button size="large" color="danger" (click)="nextZin(false)" tooltip="nog invullen">
               X <span class="xx-small" >fout</span>
             </ion-button>
-            <ion-button [routerLink]="['../tab3']">wijzig</ion-button>
+
+
           </ion-col>
         </ion-col>
         <ion-col align-self-center size-xs="5" size-md="5" size-lg="5" >

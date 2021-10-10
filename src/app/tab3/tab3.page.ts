@@ -6,8 +6,8 @@ import { DataService } from '../services/data.service';
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page {
 
+export class Tab3Page {
   laatsteZinID = 0;
   teller = 0;
   idVanAangepasteZin = 0;

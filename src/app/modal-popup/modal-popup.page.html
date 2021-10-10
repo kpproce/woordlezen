@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Wijzig de text van de zinnen</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col align-self-center size-xs="8" size-md="5" size-lg="3">
+        Weergegeven zin text:
+      </ion-col>
+      <ion-col align-self-center size-xs="12" size-md="7" size-lg="9">
+        <ion-input name="weergegevenText" type="text" placeholder="Weergegeven text"
+          [(ngModel)]='zinWeergevenTextChanged'>
+        </ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col align-self-center size-xs="8" size-md="5" size-lg="3">
+        Correct:
+      </ion-col>
+      <ion-col align-self-center size-xs="12" size-md="7" size-lg="9">
+        <ion-input name="weergegevenText" type="text" placeholder="Correcte text"
+         [(ngModel)]='zinCorrectTextChanged'>
+        </ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <ion-button color="success" (click)="closeAndSaveModal()">Sluit: sla op</ion-button>
+        <ion-button color="warning" (click)="closeAndCancelModal()">SLuit: NIET opslaan</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

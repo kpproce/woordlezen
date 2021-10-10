@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
+import { ModalPopupPage } from '../modal-popup/modal-popup.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -8,7 +10,7 @@ import { DataService } from '../services/data.service';
 })
 export class Tab1Page {
 
-
+  modelData: any;
   zinnen2;
   aantalZinnen = 0;
   aantalZinnenOver = 0;
@@ -62,7 +64,7 @@ export class Tab1Page {
   resultFromDataService: any;
   resultFromDataServiceTXT = '-- geen info';
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, public modalController: ModalController) {}
 
   ionViewWillEnter(){
     this.checkLogin();
@@ -70,10 +72,36 @@ export class Tab1Page {
     // alert ('ionView-Will-Enter');
   }
 
+  async openIonModal() {
+    const modal = await this.modalController.create({
+      component: ModalPopupPage,
+      componentProps: {
+        modelTitle: 'Nomadic models reveberation',
+        zinWeergevenText: this.actualZin,
+        zinCorrectText: this.actualZinCorrect,
+        zinId: this.zinId
+      }
+    });
+
+    modal.onDidDismiss().then((modelData) => {
+      if (modelData !== null) {
+        // this.modelData = modelData.data.zinWeergevenText;
+        console.log('Nieuwe weergeven tekst: ' + modelData.data.zinWeergevenText );
+        console.log('Nieuwe correcte tekst: ' + modelData.data.zinCorrectText );
+        this.actualZin = modelData.data.zinWeergevenText;
+        this.actualZinCorrect = modelData.data.zinCorrectText;
+        this.resetTijdZin();
+      }
+    });
+
+    return await modal.present();
+  }
+
   ngOnInit() {
    this.checkLogin() ;
    this.getZinnen();
   }
+
     onchangeSnelheid(){
       // alert(this.snelheid);
       // nivo 1 = *  0,8      // nivo 2 = *  1      // nivo 3 = *  1,2      // nivo 4 = *  1,4
