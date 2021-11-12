@@ -10,7 +10,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class Tab1Page {
 
-  moetFoutenInZinMaken = 50; // 0 is geen fouten en 100 is in alle zinnen een fout maken
+  moetFoutenInZinMaken = 60; // 0 is geen fouten en 100 is in alle zinnen een fout maken
   foutInZinGecreeerd = '';
   voorkeurFouten =  [
     {l: 'f', cb1:'v' , cb2: 'l', cb3:'ff'},
@@ -32,6 +32,7 @@ export class Tab1Page {
     ['f', 'v', 'l', 'ff'],
     ['v', 'f', 'u'],
     ['t', 'l', 'd', 'tt'],
+    ['b', 'd', 'p', 'q'],
     ['au', 'ou', 'eu', 'ua'],
     ['ou', 'au', 'uo', 'ua'],
     ['ij', 'ji', 'ei'],
@@ -40,6 +41,8 @@ export class Tab1Page {
     ['ss', 's', 'zz'],
     ['s', 'ss', 'z'],
     ['e', '3', 'ee'],
+    ['a', 'aa', 'e'],
+    ['n', 'm', 'u', 'nn'],
     ['ee', 'ea', 'e'],
   ];
 
