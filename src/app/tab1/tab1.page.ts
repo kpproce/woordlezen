@@ -10,6 +10,39 @@ import { ModalController } from '@ionic/angular';
 })
 export class Tab1Page {
 
+  moetFoutenInZinMaken = 50; // 0 is geen fouten en 100 is in alle zinnen een fout maken
+  foutInZinGecreeerd = '';
+  voorkeurFouten =  [
+    {l: 'f', cb1:'v' , cb2: 'l', cb3:'ff'},
+    {l: 't', cb1:'l' , cb2: 'd'},
+    {l: 'au', cb1:'ou' , cb2: 'ua'},
+    {l: 'ou', cb1:'au' , cb2: 'uo'},
+    {l: 'ui', cb1:'iu' , cb2: 'eu'},
+    {l: 'eu', cb1:'ue' , cb2: 'ui'},
+    {l: 'ij', cb1:'ei' , cb2: 'ji'},
+    {l: 'll', cb1:'l' , cb2: 'i'},
+    {l: 'aa', cb1:'a' , cb2: 'oa'},
+    {l: 's', cb1:'ss' , cb2: 'z'},
+    {l: 'a', cb1:'e' , cb2: 'o', cb3: 'u'},
+    {l: 'e', cb1:'3' , cb2: 'u', cb3: 'a', cb4: 'ee'},
+    {l: 'ee', cb1:'ea' , cb2: 'e'}
+  ];
+
+  voorkeurFouten2 = [
+    ['f', 'v', 'l', 'ff'],
+    ['v', 'f', 'u'],
+    ['t', 'l', 'd', 'tt'],
+    ['au', 'ou', 'eu', 'ua'],
+    ['ou', 'au', 'uo', 'ua'],
+    ['ij', 'ji', 'ei'],
+    ['ll', 'l', 'i'],
+    ['aa', 'a', 'ao','ae'],
+    ['ss', 's', 'zz'],
+    ['s', 'ss', 'z'],
+    ['e', '3', 'ee'],
+    ['ee', 'ea', 'e'],
+  ];
+
   modelData: any;
   zinnen2;
   aantalZinnen = 0;
@@ -161,7 +194,7 @@ export class Tab1Page {
           this.buttonIngelogdColor='danger';
           //alert('ingelogd: '+ this.buttonIngelogdColor);
         }
-           // alert('test2:'+ this.wwClass);
+        // alert('test2:'+ this.wwClass);
       });
     }
 
@@ -171,7 +204,6 @@ export class Tab1Page {
           this.resultFromDataService=result;
           // this.resultFromDataServiceTXT = stringify(this.resultFromDataService);
           this.resultFromDataServiceTXT = ' score opgeslagen';
-
         }); */
     }
 
@@ -180,10 +212,10 @@ export class Tab1Page {
       this.timeIntervalZin = setInterval(function() {
         this.verstrekenZin = (Math.floor(( new Date().valueOf() - this. startMomentZin.valueOf())/100)/10);
         this.duurFactor = 1 + (this.actualNivo -2 )/5;
-        if (this.verstrekenZin > (this.warningTijd * this. duurFactor)){
+        if (this.verstrekenZin > (this.warningTijd * this.duurFactor)){
           this.zinStyle = 'rgb(236, 230, 228)';
         };
-        if (this.verstrekenZin  > (this.warningTijd2 * this. duurFactor) ){
+        if (this.verstrekenZin  > (this.warningTijd2 * this.duurFactor) ){
           this.zinStyle = 'rgb(250, 170, 170)';
         };
         if (this.verstrekenZin >= this.maxTijd || this.pauze){
@@ -191,7 +223,7 @@ export class Tab1Page {
           this.zinStyle = 'rgb(250, 1, 1)';
           // backgroud 245, 244, 237
         }
-      }.bind(this),400);
+      }.bind(this),1000);
     }
   }
 
@@ -243,7 +275,7 @@ export class Tab1Page {
     this.tussenTijdMeerdereZinnen.aantalZinnen=this.geraden.length;
     // alert(this.actualZin + ' ' + this.verstreken + ' ' + this.geraden[0].tekst);
     // alert ('VOOR  verwerktijd aangeroepen: ' + this.tussenTijdMeerdereZinnen.aantalZinnen + ' correct: ' + this.actualZinCorrect);
-    if (this.actualZinCorrect) { this.tussenTijdMeerdereZinnen.aantalZinnen +=1; };
+    if (this.actualZinCorrect) { this.tussenTijdMeerdereZinnen.aantalZinnen += 1; };
     // alert (' verwerktijd aangeroepen: ' + this.tussenTijdMeerdereZinnen.aantalZinnen + ' correct: ' + this.actualZinCorrect);
   }
 
@@ -283,6 +315,79 @@ export class Tab1Page {
     // this.addNewScoreToDatabaseApi(); // niet handig, beter uitdenken
   }
 
+  zoekSubstringInVoorkeurFouten(substring: string) {
+    // return een index. -1 is niet gevonden
+   let gevondenIndex = -1;
+    let text='';
+    this.voorkeurFouten.forEach((element,i) => {
+      gevondenIndex = element.l.indexOf(substring);
+      // deze routine vindt de laatste
+      text+= 'zoek: ' +   this.actualZin + ' letter:' + substring + ' -- vergelijk met: '
+          + element.l + ' -- gevondenIndex: ' + gevondenIndex + '\n';
+    });
+    // alert (text);
+    return gevondenIndex;
+  }
+
+  geefVervangendeLetter(i: number) {
+    // gebruikt classmember:  voorkeurFouten =  [
+    // zoek l en vervang met cb1, cb2 of cb3, kies random, er kunnen meer zijn
+    // voor test vervang met eerste
+    const gekozen =  Math.floor(Math.random() *this.voorkeurFouten2[i].length);
+    // alert ('max: ${max} fouten: ${this.voorkeurFouten2[i].toString}');
+    // alert (this.voorkeurFouten2[i][0] + ' -- ' + gekozen + ' -- ' + this.voorkeurFouten2[i][gekozen] );
+    return this.voorkeurFouten2[i][gekozen];
+  }
+
+maakFoutInZin(goedeZin: string) {
+    // gebruikt classmember:  voorkeurFouten =  [ {l: 'a', cb1:'e' , cb2: 'o', cb3: 'u'},
+    // zoek of een letter voorkomt en vervang die.
+    let teller=-1;
+    let gevondenIndex = -1;
+    let teVervangenText: any;
+    let nieuweText: any;
+    let stop = false;
+    let info = '';
+    // alert('test: ' + goedeZin + ' eerste zoekletter: '+ this.voorkeurFouten[teller+1].l) ;
+    // alert ('check op letters: ' + this.voorkeurFouten.map(item =>  item.l ) );
+    while (!stop) {
+      teller += 1;
+      //alert (teller);
+      try {
+        gevondenIndex = (goedeZin.indexOf(this.voorkeurFouten2[teller][0]));
+        info += ('voorkeurFouten[' + teller + ']: ' + this.voorkeurFouten2[teller][0] +  ' --gevonden in soord op pos:' + gevondenIndex);
+        // alert ('voorkeurfouten lengte: ' + this.voorkeurFouten.length + ' zin: ' + goedeZin + ' gevondenIndex: ' + gevondenIndex
+        //   + ' -- teller: ' + teller + '--' + this.voorkeurFouten[teller].l);
+        stop = (gevondenIndex>=0 || teller >= this.voorkeurFouten2.length-1);
+      }
+        catch (error){
+          stop=true;
+      }
+
+      // alert (goedeZin +' fouteDeelteks:' + teller + ' zoek naar:' + this.voorkeurFouten[teller].l + ' gevonden op:' + gevondenIndex);
+    }
+    // als gevondenIndex -1 dan letter combi uit voorkeurfouten niet gevonden, anders wel.
+    //alert(info);
+
+    if (gevondenIndex>=0) {
+      teVervangenText = this.voorkeurFouten2[teller][0];
+      nieuweText = this.geefVervangendeLetter(teller);
+      const lo =  teVervangenText.length;
+      this.foutInZinGecreeerd += teVervangenText + '/' + nieuweText;
+      const ln =  nieuweText.length;
+      // alert ( goedeZin.substr(0,gevondenIndex) + nieuweText + goedeZin.substr(gevondenIndex+lo, goedeZin.length-ln));
+      // alert ( goedeZin +  ' index:' + gevondenIndex + ' :  ' + goedeZin.substr(0,gevondenIndex) );
+      return  goedeZin.substr(0,gevondenIndex) + nieuweText + goedeZin.substr(gevondenIndex+lo, goedeZin.length-lo);
+      alert ('gevondenIndex -'+ gevondenIndex  + '- groter gelijk aan 0' );
+    //
+    // return (goedeZin.substr(0,teller) + this.geefVervangendeLetter(gevondenIndex) +goedeZin.substr(teller+1, goedeZin.length-teller-1));
+    } else {
+      // alert ( goedeZin +  ' index:' + gevondenIndex + ' :  ' + goedeZin.substr(0,gevondenIndex) );
+      // alert ('gevondenIndex < 0' );
+      return (goedeZin);
+    }
+  }
+
   nextZin(goed: boolean){
     this.beoordeelZin(goed);
 
@@ -297,21 +402,33 @@ export class Tab1Page {
 
       this.zinnen2.splice(0, 1);  // verwijder de eerste regel, zodat dezelfde niet nog een keer gevraagd wordt.
       if (this.zinnen2.length<1) {
-        this.actualZin = 'alle zinnen gehad, klik reload voor een nieuwe lijst';
+        this.actualZin = 'alle zinnen gehad, klik Nieuwe zinnen';
         // stop de tijd
-
         // clearInterval(this.timeIntervalZin);
         // clearInterval(this.timerIntervalMeerdereZinnen);
         this.pauze=true;
         alert((this.tussenTijdMeerdereZinnen.aantalZinnen-1) +
         ' zinnen in ' + this.tussenTijdMeerdereZinnen.tussenTijd + ' sec, ' +
-        this.aantalGoed() + ' GOED!') ;
-
+        this.aantalGoed() + ' GOED!');
       } else {
         this.pauze = false;
         this.zinStyle = 'rgb(10, 10, 10)';
-        this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+
+        // origineel V1
+        // this.actualZin = this.zinnen2[this.zinnenIndex].tekst;
+        // alert (this.maakFoutInZin(this.actualZin));
+        // this.actualZinCorrect = this.zinnen2[this.zinnenIndex].tekstCorrect;
+        // met automatische foutmaker..
+
         this.actualZinCorrect = this.zinnen2[this.zinnenIndex].tekstCorrect;
+        const rnd = Math.floor(Math.random()*100);
+        // alert (rnd);
+        this.foutInZinGecreeerd= '';
+        if (rnd < this.moetFoutenInZinMaken) {
+          this.actualZin = this.maakFoutInZin(this.actualZinCorrect);
+        } else {
+          this.actualZin = this.actualZinCorrect;
+        }
         this.actualNivo = this.zinnen2[this.zinnenIndex].nivo - 0 ;
         this.duurFactor = 1 + (this.actualNivo -2 )/5;
       }
@@ -322,11 +439,12 @@ export class Tab1Page {
   }
 
   getZinSize(actualZin){
-   if (actualZin.length < 14 || this.actualNivo<2) {return 'xxx-large';
-  } else {
-    if (actualZin.length > 45 ) {return 'x-large';} else {return 'xx-large';}
-  }
-   // return 'xx-large';
+   if (actualZin.length < 14 || this.actualNivo<2) {
+      return 'xxx-large';
+    } else {
+      if (actualZin.length > 45 ) {return 'x-large';} else {return 'xx-large';}
+    }
+    // return 'xx-large';
   }
 
   getZinTekstColor() {
