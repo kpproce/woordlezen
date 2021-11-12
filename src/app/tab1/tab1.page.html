@@ -28,7 +28,7 @@
               </ion-select>
             </ion-row>
             <ion-row color="primary" justify-content-center>
-              <ion-select class="bevat ion-no-padding" multiple="true" [(ngModel)]='bevat'
+              <ion-select class="bevat ion-no-padding" multiple="true" [(ngModel)]='containsLetterGroups'
                 (ionChange)="getZinnen()">
                 <ion-select-option value="all">alle letters</ion-select-option>
                 <ion-select-option value="au">au</ion-select-option>
@@ -43,7 +43,7 @@
             </ion-row>
           </ion-col>
           <ion-col align-self-center size-xs="3"size-md="3" size-lg="3">
-            <ion-button class="medium" [color]="dataService.getLoginButtonColor()" [routerLink]="['/login'] ">
+            <ion-button class="medium" [color]="dataService.getLoginButtonColor()" [routerLink]="['/login']">
               Login
             </ion-button>
           </ion-col>
@@ -77,7 +77,7 @@
           <!-- --- modal edit screen om zit direct te wijzigen-->
 
         <span [style.color]="zinStyle"  class="padleft {{getZinSize(actualZin)}}">{{actualZin}} </span>
-
+        <span [style.color]="zinStyle"  class="padleft almostHide">{{foutInZinGecreeerd}} </span>
       </ion-col>
 
     </ion-row>
@@ -92,8 +92,6 @@
             <ion-button size="large" color="danger" (click)="nextZin(false)" tooltip="nog invullen">
               X <span class="xx-small" >fout</span>
             </ion-button>
-
-
           </ion-col>
         </ion-col>
         <ion-col align-self-center size-xs="5" size-md="5" size-lg="5" >
